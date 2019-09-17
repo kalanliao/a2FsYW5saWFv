@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   
-  <title>Kalan</title>
+  <title>javascript学习-01 | Kalan</title>
   <meta name="description" content>
   <meta name="keywords" content>
   <meta name="HandheldFriendly" content="True">
@@ -12,13 +12,31 @@
   <link rel="shortcut icon" href="/">
   <link rel="alternate" href="/atom.xml" title="Kalan">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Kalan">
-<meta property="og:url" content="https://kalanliao.github.io/index.html">
+  <meta name="description" content="Console我们经常会在浏览器中使用console.log来进行调试和参数的输出查看，但是console其实是一个非常丰富的封装，其中还有很多的方法，今天就来介绍一下。首先，我们先看一下console的代码 下面就介绍一下，我们会用到的可以提高我们开发效率，调试效率的方法。 1. console.log()123456//平时我们使用的时候会这样console.log(&quot;测试内容不要当真&quot;);/">
+<meta name="keywords" content="js">
+<meta property="og:type" content="article">
+<meta property="og:title" content="javascript学习-01">
+<meta property="og:url" content="https://kalanliao.github.io/2019/09/17/javascript-study-01/index.html">
 <meta property="og:site_name" content="Kalan">
+<meta property="og:description" content="Console我们经常会在浏览器中使用console.log来进行调试和参数的输出查看，但是console其实是一个非常丰富的封装，其中还有很多的方法，今天就来介绍一下。首先，我们先看一下console的代码 下面就介绍一下，我们会用到的可以提高我们开发效率，调试效率的方法。 1. console.log()123456//平时我们使用的时候会这样console.log(&quot;测试内容不要当真&quot;);/">
 <meta property="og:locale" content="en">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/11738664-81199621a81286e1.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/11738664-e16ae0b53ee2ce75.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/11738664-88655740385f9fa7.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/11738664-22c5e6cdc4c19285.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/11738664-b3afca936115d49a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/11738664-23a8511207cf4d93.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/11738664-cd3f0ab443607aaf.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/11738664-02ccb6c6f99fb7c8.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/11738664-8058b1115fd0b077.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/11738664-bba5aca58df2db11.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/11738664-39beb2a9e381b456.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/3973862-b82745c286f40c52.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/322">
+<meta property="og:updated_time" content="2019-09-17T06:58:32.741Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Kalan">
+<meta name="twitter:title" content="javascript学习-01">
+<meta name="twitter:description" content="Console我们经常会在浏览器中使用console.log来进行调试和参数的输出查看，但是console其实是一个非常丰富的封装，其中还有很多的方法，今天就来介绍一下。首先，我们先看一下console的代码 下面就介绍一下，我们会用到的可以提高我们开发效率，调试效率的方法。 1. console.log()123456//平时我们使用的时候会这样console.log(&quot;测试内容不要当真&quot;);/">
+<meta name="twitter:image" content="https://upload-images.jianshu.io/upload_images/11738664-81199621a81286e1.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
     
   <link href="https://fonts.googleapis.com/css?family=Inconsolata|Titillium+Web" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css?family=Roboto+Mono" rel="stylesheet">
@@ -129,31 +147,31 @@
   <div class="l_body">
     <div class='container clearfix'>
       <div class='l_main'>
-        
-<section class="post-list">
+        <article id="post-javascript-study-01"
+  class="post white-box article-type-post"
+  itemscope itemprop="blogPost">
+	<section class='meta'>
+	<h2 class="title">
+  	<a href="/2019/09/17/javascript-study-01/">
+    	javascript学习-01
+    </a>
+  </h2>
+	<time>
+	  Sep 17, 2019
+	</time>
 	
-    <div class='post-wrapper'>
-      <article class="post reveal">
-  <section class="meta">
-    
-    <h2 class="title">
-      <a href="/2019/09/17/javascript-study-01/">
-        javascript学习-01
-      </a>
-    </h2>
-    
-    <time>
-      Sep 17, 2019
-    </time>
-		
     
     <div class='cats'>
         <a href="/categories/JavaScript/">JavaScript</a>
     </div>
 
-  </section>
-  <section class="article typo">
-	  <h3 id="Console"><a href="#Console" class="headerlink" title="Console"></a>Console</h3><p>我们经常会在浏览器中使用<code>console.log</code>来进行调试和参数的输出查看，但是<code>console</code>其实是一个非常丰富的封装，其中还有很多的方法，今天就来介绍一下。<br>首先，我们先看一下<code>console</code>的代码<br><img src="https://upload-images.jianshu.io/upload_images/11738664-81199621a81286e1.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="console结构"></p>
+	</section>
+	
+		<section class="toc-wrapper"><ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#Console"><span class="toc-number">1.</span> <span class="toc-text">Console</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-console-log"><span class="toc-number">1.1.</span> <span class="toc-text">1. console.log()</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#6-console-count"><span class="toc-number">1.2.</span> <span class="toc-text">6.console.count</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#9-console-group"><span class="toc-number">1.3.</span> <span class="toc-text">9.console.group()</span></a></li></ol></li></ol></section>
+	
+	<section class="article typo">
+  	<div class="article-entry" itemprop="articleBody">
+    	<h3 id="Console"><a href="#Console" class="headerlink" title="Console"></a>Console</h3><p>我们经常会在浏览器中使用<code>console.log</code>来进行调试和参数的输出查看，但是<code>console</code>其实是一个非常丰富的封装，其中还有很多的方法，今天就来介绍一下。<br>首先，我们先看一下<code>console</code>的代码<br><img src="https://upload-images.jianshu.io/upload_images/11738664-81199621a81286e1.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="console结构"></p>
 <p>下面就介绍一下，我们会用到的可以提高我们开发效率，调试效率的方法。</p>
 <h4 id="1-console-log"><a href="#1-console-log" class="headerlink" title="1. console.log()"></a>1. console.log()</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//平时我们使用的时候会这样</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">"测试内容不要当真"</span>);</span><br><span class="line"><span class="comment">//或者这样</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>)</span><br><span class="line"><span class="comment">//或者这样</span></span><br><span class="line"><span class="built_in">console</span>.log(&#123;<span class="attr">name</span>:<span class="number">1</span>&#125;)</span><br></pre></td></tr></table></figure>
 
@@ -197,65 +215,34 @@
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyClass</span> </span>&#123;</span><br><span class="line">    <span class="keyword">constructor</span>(dataAccess) &#123;</span><br><span class="line">        <span class="built_in">console</span>.group(<span class="string">"Constructor"</span>);</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">"Constructor executed"</span>);</span><br><span class="line">        <span class="built_in">console</span>.assert(</span><br><span class="line">            <span class="keyword">typeof</span> dataAccess === <span class="string">"object"</span>,</span><br><span class="line">            <span class="string">"Potentially incorrect dataAccess object"</span></span><br><span class="line">        );</span><br><span class="line">        <span class="keyword">this</span>.initializeEvents();</span><br><span class="line">        <span class="built_in">console</span>.groupEnd();</span><br><span class="line">    &#125;</span><br><span class="line">    initializeEvents() &#123;</span><br><span class="line">        <span class="built_in">console</span>.group(<span class="string">"events"</span>);</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">"Initialising events"</span>);</span><br><span class="line">        <span class="built_in">console</span>.groupEnd();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">let</span> myClass = <span class="keyword">new</span> MyClass(<span class="literal">false</span>);</span><br></pre></td></tr></table></figure>
 
 
-
-    
-    
-    
-	  <div class="full-width auto-padding tags">
+  	</div>
+	  
+	  <div class="article-tags tags">
       
         <a href="/tags/js/">js</a>
       
 	  </div>
     
-  </section>
-</article>
-    </div>
-  
-    <div class='post-wrapper'>
-      <article class="post reveal">
-  <section class="meta">
-    
-    <h2 class="title">
-      <a href="/2019/09/17/hello-world/">
-        Hello World
-      </a>
-    </h2>
-    
-    <time>
-      Sep 17, 2019
-    </time>
 		
-    
-    <div class='cats'>
-        <a href="/categories/测试/">测试</a>
-    </div>
-
-  </section>
-  <section class="article typo">
-	  <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>
-
-
-    
-    
-    
-  </section>
+	
+		<div class="art-item-footer">
+				
+				
+					<span class="art-item-right">next：<a href="/2019/09/17/hello-world/" rel="next"  title="Hello World">
+						Hello World
+					</a><i class="icon icon-chevron-thin-right"></i></span>
+				
+		</div>
+	
+	</section>
+	
 </article>
-    </div>
-  
-</section>
-
+<script>
+	window.subData = {
+		title: 'javascript学习-01',
+		tools: true
+	}
+</script>
 
       </div>
       <aside class='l_side'>
