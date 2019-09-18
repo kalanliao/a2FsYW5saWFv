@@ -195,7 +195,7 @@ JSON stands for “JavaScript Object Notation”, a format by which object field
 <p>其实脑海里应该有一个概念：利用 JSONP 格式返回的值一段要立即执行的 JavaScript 代码，所以不会像 ajax 的 XmlHttpRequest 那样可以监听不同事件对数据进行不同处理。</p>
 <p>处理结果如下所示：</p>
 <p><img src="/images/javascript-study-02/3.jpg" alt="结果"></p>
-<h2 id="使用-标签原生实现-JSONP"><a href="#使用-标签原生实现-JSONP" class="headerlink" title="使用  标签原生实现 JSONP"></a>使用 <script> 标签原生实现 JSONP</h2><p>经过上面的事件，你是不是觉得 JSONP 的实现和 Ajax 大同小异？</p>
+<h2 id="使用-lt-script-gt-标签原生实现-JSONP"><a href="#使用-lt-script-gt-标签原生实现-JSONP" class="headerlink" title="使用 &lt;script&gt; 标签原生实现 JSONP"></a>使用 <code>&lt;script&gt;</code> 标签原生实现 JSONP</h2><p>经过上面的事件，你是不是觉得 JSONP 的实现和 Ajax 大同小异？</p>
 <p>其实，由于实现的原理不同，由 JSONP 实现的跨域调用不是通过 XmlHttpRequset 对象，而是通过 script 标签，所以在实现原理上，JSONP 和 Ajax 已经一点关系都没有了。看上去形式相似只是由于 jQuery 对 JSONP 做了封装和转换。</p>
 <p>比如在上面的例子中，我们假设要传输的数据 data 格式如下：</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    name: <span class="string">"chiaki"</span>,</span><br><span class="line">    id<span class="string">": "</span><span class="number">3001</span><span class="string">"</span></span><br><span class="line"><span class="string">&#125;</span></span><br></pre></td></tr></table></figure>
@@ -240,8 +240,8 @@ Used in response to a preflight request to indicate which HTTP headers can be us
 <p>3.JSONP 可以在不支持 CORS 的老旧浏览器上运作。</p>
 <h1 id="一些其它的跨域调用方式"><a href="#一些其它的跨域调用方式" class="headerlink" title="一些其它的跨域调用方式"></a>一些其它的跨域调用方式</h1><h2 id="window-name"><a href="#window-name" class="headerlink" title="window.name"></a>window.name</h2><p>window对象有个name属性，该属性有个特征：即在一个窗口 (window) 的生命周期内，窗口载入的所有的页面都是共享一个 window.name 的，每个页面对 window.name 都有读写的权限，window.name 是持久存在一个窗口载入过的所有页面中的，并不会因新页面的载入而进行重置。</p>
 <h2 id="window-postMessage"><a href="#window-postMessage" class="headerlink" title="window.postMessage()"></a>window.postMessage()</h2><p>这个方法是 HTML5 的一个新特性，可以用来向其他所有的 window 对象发送消息。需要注意的是我们必须要保证所有的脚本执行完才发送 MessageEvent，如果在函数执行的过程中调用了他，就会让后面的函数超时无法执行。</p>
-<p>参考：<a href="https://developer.mozilla.org/en-US/docs/Web/API/Window/postMessage">https://developer.mozilla.org/en-US/docs/Web/API/Window/postMessage</a></p>
-</script></h2>
+<p>参考：<a href="https://developer.mozilla.org/en-US/docs/Web/API/Window/postMessage" target="_blank" rel="noopener">https://developer.mozilla.org/en-US/docs/Web/API/Window/postMessage</a></p>
+
 
     
     
