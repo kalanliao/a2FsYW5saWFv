@@ -141,6 +141,58 @@
   <section class="meta">
     
     <h2 class="title">
+      <a href="/2019/09/19/netcore/netcore3-0-context-gc/">
+        .NET Core 3.0 可回收程序集加载上下文
+      </a>
+    </h2>
+    
+    <time>
+      Sep 19, 2019
+    </time>
+		
+    
+    <div class='cats'>
+        <a href="/categories/NetCore/">.NetCore</a>
+    </div>
+
+  </section>
+  <section class="article typo">
+	  <h1 id="前世今生"><a href="#前世今生" class="headerlink" title="前世今生"></a>前世今生</h1><p>.NET诞生以来，程序集的动态加载和卸载都是一个Hack的技术，之前的NetFx都是使用AppDomain的方式去加载程序集，然而AppDomain并没有提供直接卸载一个程序集的API，而是要卸载整个AppDomain才能卸载包含在其中的所有程序集。然而卸载整个CurrentAppDomain会使程序不能工作。</p>
+<p>可能有人另辟西经，创建别一个AppDomain来加载/卸载程序集，但是由于程序集之间是不能跨域访问的，也导致只能通过Remote Proxy的方式去访问，这样在类型创建和使用上带来了一定的难度也是类型的继承变得相当复杂。</p>
+<p>.NET Core中一直没有AppDomain的支持。但是在.NET Core 3.0中，我最期待的一个特性就是对可收集程序集的支持(Collectible AssemblyLoadContext)。 众所周知.NET Core中一直使用AssemblyLoadContext的API，来进行程序集的动态加载，但是并没有提供Unload的方法，此次升级更新了这方面的能力。</p>
+<h1 id="AssemblyLoadContext"><a href="#AssemblyLoadContext" class="headerlink" title="AssemblyLoadContext"></a>AssemblyLoadContext</h1><p>其实这次AssemblyLoadContext的设计，我认为更像是Java中ClassLoader的翻版，可以说非常类似。在使用过程中自定义AssemblyLoadContext可以内部管理其中的程序集，并对整体Context进行Unload。使用AssemblyLoadContext也可以避免程序集名称和版本的冲突。</p>
+<h1 id="Getting-Started"><a href="#Getting-Started" class="headerlink" title="Getting Started"></a>Getting Started</h1><p>.NET Core 3.0还没有正式版，所有要使用预览版的SDK完成以下实例。我使用的是.NET Core SDK 3.0.100-preview-009812</p>
+<p><code>dotnet new globaljson --sdk-version 3.0.100-preview-009812</code></p>
+<p>AssemblyLoadContext是一个抽象类的，我们需要子类化。下面显示的是我们创建自定义AssemblyLoadContext的方法,实现一个可回收的Context需要在构造器中指定isCollectible: true ：</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">CollectibleAssemblyLoadContext</span> : <span class="title">AssemblyLoadContext</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">CollectibleAssemblyLoadContext</span>(<span class="params"></span>) : <span class="title">base</span>(<span class="params">isCollectible: <span class="literal">true</span></span>)</span></span><br><span class="line"><span class="function"></span>    &#123; &#125;</span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">override</span> Assembly <span class="title">Load</span>(<span class="params">AssemblyName assemblyName</span>)</span></span><br><span class="line"><span class="function"></span>    &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>使用netstandard2.0创建一个library</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">using</span> System;</span><br><span class="line"><span class="keyword">namespace</span> <span class="title">SampleLibrary</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">class</span> <span class="title">SayHello</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">Hello</span>(<span class="params"><span class="keyword">int</span> iteration</span>)</span></span><br><span class="line"><span class="function"></span>        &#123;</span><br><span class="line">            Console.WriteLine(<span class="string">$"Hello <span class="subst">&#123;iteration&#125;</span>!"</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>测试Load/Unload</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> context = <span class="keyword">new</span> CollectibleAssemblyLoadContext();</span><br><span class="line"><span class="keyword">var</span> assemblyPath = Path.Combine(Directory.GetCurrentDirectory(),<span class="string">"SampleLibrary.dll"</span>);</span><br><span class="line"><span class="keyword">using</span> (<span class="keyword">var</span> fs = <span class="keyword">new</span> FileStream(assemblyPath, FileMode.Open, FileAccess.Read))</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">var</span> assembly = context.LoadFromStream(fs);</span><br><span class="line">    <span class="keyword">var</span> type = assembly.GetType(<span class="string">"SampleLibrary.SayHello"</span>);</span><br><span class="line">    <span class="keyword">var</span> greetMethod = type.GetMethod(<span class="string">"Hello"</span>);</span><br><span class="line">    <span class="keyword">var</span> instance = Activator.CreateInstance(type);</span><br><span class="line">    greetMethod.Invoke(instance, <span class="keyword">new</span> <span class="keyword">object</span>[] &#123; i &#125;);</span><br><span class="line">&#125;</span><br><span class="line">context.Unload();</span><br><span class="line">GC.Collect();</span><br><span class="line">GC.WaitForPendingFinalizers();</span><br></pre></td></tr></table></figure>
+
+<p>当执行GC收回后，加载的程序集会被完全的回收。</p>
+
+
+    
+    
+    
+	  <div class="full-width auto-padding tags">
+      
+        <a href="/tags/C-netcore-netcore3-0/">C#,.netcore,.netcore3.0</a>
+      
+	  </div>
+    
+  </section>
+</article>
+    </div>
+  
+    <div class='post-wrapper'>
+      <article class="post reveal">
+  <section class="meta">
+    
+    <h2 class="title">
       <a href="/2019/09/17/netcore/netcore3.0_preview/">
         .NetCore3.0预览
       </a>
@@ -294,7 +346,7 @@
     
     <ul class="entry">
     
-        <li><a class="flat-box" href="/categories/NetCore/"><div class='name'>.NetCore</div><div class='badget'>1</div></a></li>
+        <li><a class="flat-box" href="/categories/NetCore/"><div class='name'>.NetCore</div><div class='badget'>2</div></a></li>
     
         <li><a class="flat-box" href="/categories/Collect/"><div class='name'>Collect</div><div class='badget'>1</div></a></li>
     
@@ -311,7 +363,7 @@
 <div class="m_widget tagcloud">
     <div class="header">Tags</div>
     <div class='content'>
-        <a href="/tags/C-netcore-netcore3-0/" style="font-size: 14px; color: #808080">C#,.netcore,.netcore3.0</a> <a href="/tags/js/" style="font-size: 20px; color: #000">js</a> <a href="/tags/regex/" style="font-size: 14px; color: #808080">regex</a>
+        <a href="/tags/C-netcore-netcore3-0/" style="font-size: 20px; color: #000">C#,.netcore,.netcore3.0</a> <a href="/tags/js/" style="font-size: 20px; color: #000">js</a> <a href="/tags/regex/" style="font-size: 14px; color: #808080">regex</a>
     </div>
 </div>
 
