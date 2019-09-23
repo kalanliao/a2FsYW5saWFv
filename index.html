@@ -137,6 +137,57 @@
   <section class="meta">
     
     <h2 class="title">
+      <a href="/2019/09/23/netcore/netcore3-0-enum-flagsattr/">
+        netcore3.0_enum_flagsattr
+      </a>
+    </h2>
+    
+    <time>
+      Sep 23, 2019
+    </time>
+		
+    
+    <div class='cats'>
+        <a href="/categories/NetCore/">.NetCore</a>
+    </div>
+
+  </section>
+  <section class="article typo">
+	  <p>应用Enum的FlagsAttribute标签能做很多应用，可以使枚举获得多个判断的效果<br>下面这段代码：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">[Flags]</span><br><span class="line">    enum WeekDays</span><br><span class="line">    &#123; </span><br><span class="line">        Monday = 0x1,</span><br><span class="line">        Tuesday = 0x2,</span><br><span class="line">        Wednesday = 0x4,</span><br><span class="line">        Thursday = 0x8,</span><br><span class="line">        Friday = 0x10,</span><br><span class="line">        Saturday = 0x20,</span><br><span class="line">        Sunday = 0x40</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<p>同样的我们也可以这么写</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">[Flags]</span><br><span class="line">    public enum WeekDays</span><br><span class="line">    &#123;</span><br><span class="line">        Monday = 1,</span><br><span class="line">        Tuesday = 2,</span><br><span class="line">        Wednesday = 4,</span><br><span class="line">        Thursday = 8,</span><br><span class="line">        Friday = 16,</span><br><span class="line">        Saturday = 32,</span><br><span class="line">        Sunday = 64</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<p>这里会用到我们位运算的特性</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">WeekDays wds = WeekDays.Monday | WeekDays.Sunday | WeekDays.Tuesday;</span><br><span class="line">/* 我们来看看计算过程:</span><br><span class="line"> * 或运算:</span><br><span class="line">     0000 0001 --星期一 0x1</span><br><span class="line">  或 0010 0000 --星期六 0x20</span><br><span class="line">  或 0000 0010 --星期二 0x2</span><br><span class="line"> =   0010 0011 = 35</span><br><span class="line"> *换句话说: 某个位是1就代表了这个位上的值在枚举中存在</span><br><span class="line"> */</span><br><span class="line">Console.WriteLine(&quot;这3天组合Int为: &quot; + (int)wds);</span><br><span class="line">/*利用上面规则来判断枚举值中是否包含某个枚举值就轻而易举*/</span><br><span class="line">if ((wds &amp; WeekDays.Monday) != 0)</span><br><span class="line">    Console.WriteLine(&quot;星期一是其中一天&quot;);</span><br><span class="line">if ((wds &amp; WeekDays.Saturday) == 0)</span><br><span class="line">    Console.WriteLine(&quot;星期六不是其中一天&quot;);</span><br><span class="line"></span><br><span class="line">//(补充)如果将某个值去掉的话可以按照原来采用这次方式</span><br><span class="line">/* 将星期六从枚举变量中去掉</span><br><span class="line"> *  0010 0011</span><br><span class="line"> * &amp;1011 1111 (~WeekDays.Monday)取反</span><br><span class="line"> * =0000 0011 这样就把星期一去掉啦!</span><br><span class="line">*/</span><br><span class="line">wds = wds &amp; (~WeekDays.Monday);</span><br><span class="line">Console.WriteLine(&quot;去掉星期一后的效果: &quot; + wds);</span><br></pre></td></tr></table></figure>
+
+<p>到这里我们看到可以联想到可以用这个枚举来做一些简单的页面权限的判断<br>比如我们有下面这些权限</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">[Flags]</span><br><span class="line">public enum Permissions</span><br><span class="line">&#123;</span><br><span class="line">    [Description(&quot;未設定&quot;)]</span><br><span class="line">    None = 0,</span><br><span class="line"></span><br><span class="line">    [Description(&quot;建立&quot;)]</span><br><span class="line">    Create = 1,</span><br><span class="line"></span><br><span class="line">    [Description(&quot;讀取&quot;)]</span><br><span class="line">    Read = 2,</span><br><span class="line"></span><br><span class="line">    [Description(&quot;更新&quot;)]</span><br><span class="line">    Update = 4,</span><br><span class="line"></span><br><span class="line">    [Description(&quot;刪除&quot;)]</span><br><span class="line">    Delete = 8,</span><br><span class="line"></span><br><span class="line">    [Description(&quot;所有功能&quot;)]</span><br><span class="line">    All = Create | Read | Update | Delete</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>通过下面的判断方法来进行权限判断</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">Permissions permission = Permissions.None;</span><br><span class="line">permission = permission | Permissions.Create;</span><br><span class="line">MessageBox.Show(permission.ToString());</span><br><span class="line">// Result: Create</span><br><span class="line">permission = permission | Permissions.Read;</span><br><span class="line">permission = permission | Permissions.Update;</span><br><span class="line">MessageBox.Show(permission.ToString());</span><br><span class="line">// Result: Create, Read, Update</span><br><span class="line">permission = (permission &amp; (Permissions.All ^ Permissions.Read));</span><br><span class="line">MessageBox.Show(permission.ToString());</span><br><span class="line">// Result: Create, Update</span><br></pre></td></tr></table></figure>
+
+    
+    
+    
+	  <div class="full-width auto-padding tags">
+      
+        <a href="/tags/C/">C#</a>
+      
+        <a href="/tags/NetCore/">NetCore</a>
+      
+	  </div>
+    
+  </section>
+</article>
+    </div>
+  
+    <div class='post-wrapper'>
+      <article class="post reveal">
+  <section class="meta">
+    
+    <h2 class="title">
       <a href="/2019/09/19/creed/Jack-Ma01/">
         马云离职语录
       </a>
@@ -577,7 +628,9 @@ Used in response to a preflight request to indicate which HTTP headers can be us
     
 	  <div class="full-width auto-padding tags">
       
-        <a href="/tags/C-netcore-netcore3-0/">C#,.netcore,.netcore3.0</a>
+        <a href="/tags/C/">C#</a>
+      
+        <a href="/tags/NetCore/">NetCore</a>
       
 	  </div>
     
@@ -756,7 +809,7 @@ Used in response to a preflight request to indicate which HTTP headers can be us
     
     <ul class="entry">
     
-        <li><a class="flat-box" href="/categories/NetCore/"><div class='name'>.NetCore</div><div class='badget'>2</div></a></li>
+        <li><a class="flat-box" href="/categories/NetCore/"><div class='name'>.NetCore</div><div class='badget'>3</div></a></li>
     
         <li><a class="flat-box" href="/categories/Collect/"><div class='name'>Collect</div><div class='badget'>1</div></a></li>
     
@@ -775,7 +828,7 @@ Used in response to a preflight request to indicate which HTTP headers can be us
 <div class="m_widget tagcloud">
     <div class="header">Tags</div>
     <div class='content'>
-        <a href="/tags/C-netcore-netcore3-0/" style="font-size: 20px; color: #000">C#,.netcore,.netcore3.0</a> <a href="/tags/js/" style="font-size: 20px; color: #000">js</a> <a href="/tags/regex/" style="font-size: 14px; color: #808080">regex</a> <a href="/tags/马云-Jack-MA/" style="font-size: 14px; color: #808080">马云,Jack MA</a>
+        <a href="/tags/C/" style="font-size: 20px; color: #000">C#</a> <a href="/tags/C-netcore-netcore3-0/" style="font-size: 14px; color: #808080">C#,.netcore,.netcore3.0</a> <a href="/tags/NetCore/" style="font-size: 20px; color: #000">NetCore</a> <a href="/tags/js/" style="font-size: 20px; color: #000">js</a> <a href="/tags/regex/" style="font-size: 14px; color: #808080">regex</a> <a href="/tags/马云-Jack-MA/" style="font-size: 14px; color: #808080">马云,Jack MA</a>
     </div>
 </div>
 
