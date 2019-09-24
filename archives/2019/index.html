@@ -142,6 +142,280 @@
   <section class="meta">
     
     <h2 class="title">
+      <a href="/2019/09/24/netcore/netcore3-0-public/">
+        netcore3.0_public
+      </a>
+    </h2>
+    
+    <time>
+      Sep 24, 2019
+    </time>
+		
+    
+    <div class='cats'>
+        <a href="/categories/NetCore/">NetCore</a>
+    </div>
+
+  </section>
+  <section class="article typo">
+	  <p>很高兴宣布.NET Core 3.0的发布。它包括许多改进，包括添加Windows窗体和WPF，添加新的JSON API，对ARM64的支持以及全面提高的性能。</p>
+<p>C# 8 也是此发行版的一部分，其中包括可为空，异步流和更多模式。包含F＃4.7专注于放宽语法并定位.NET Standard 2.0。</p>
+<p>可以立即开始将现有项目更新为目标.NET Core 3.0。该版本与以前的版本兼容，从而使更新变得容易。</p>
+<p>观看团队和社区在.NET Conf上谈论.NET的事情，现在直播（<a href="https://www.dotnetconf.net/）！" target="_blank" rel="noopener">https://www.dotnetconf.net/）！</a></p>
+<p>可以下载适用于Windows，macOS和Linux的.NET Core 3.0：</p>
+<p>.NET Core 3.0 SDK和运行时（<a href="https://dotnet.microsoft.com/download/dotnet-core/3.0）" target="_blank" rel="noopener">https://dotnet.microsoft.com/download/dotnet-core/3.0）</a></p>
+<p>Snap安装程序</p>
+<p>Docker映像</p>
+<p>ASP.NET Core 3.0和EF Core 3.0也发布</p>
+<p>Visual Studio 2019 16.3和适用于Mac 8.3的Visual Studio也在今天发布，并且需要更新才能将.NET Core 3.0与Visual Studio一起使用。</p>
+<p>.NET Core 3.0是Visual Studio 2019 16.3的一部分。只需升级Visual Studio 2019 16.3就可以获取.NET Core。</p>
+<p>感谢所有为.NET Core 3.0做出贡献的人！数百人参与了此版本的发布，包括社区的重大贡献。</p>
+<p>发行说明：</p>
+<p>.NET Core 3.0发行说明</p>
+<p>.NET Core 2.2-&gt; 3.0 API差异</p>
+<p>.NET Core 3.0贡献者列表</p>
+<p>GitHub发布</p>
+<p>.NET Core 3.0 问题的GitHub问题</p>
+<h1 id="关于-NET-Core-3-0"><a href="#关于-NET-Core-3-0" class="headerlink" title="关于.NET Core 3.0"></a>关于.NET Core 3.0</h1><p>在深入探究.NET Core 3.0中的所有新功能之前，需要引起一些关键的改进和指导，以引起注意。这是快速打孔清单。</p>
+<p>.NET Core 3.0已经在dot.net和Bing.com上托管了几个月，已经通过了测试。许多其他Microsoft团队很快将在生产中的.NET Core 3.0上部署大型工作负载。</p>
+<p>在许多组件中，性能都得到了极大的提高，并且在.NET Core 3.0中的性能改进中进行了详细介绍。</p>
+<p>C＃8添加异步流，范围/索引，更多模式和可为空的引用类型。Nullable使可以直接针对导致的代码缺陷NullReferenceException。框架库的最底层已被注释，以便知道何时可以期待null。</p>
+<p>F＃4.7致力于通过隐式yield表达式和一些语法放松使某些事情变得容易。它还包含对的支持LangVersion，并nameof在预览中附带并打开了静态类。F＃核心库现在还针对.NET Standard 2.0。可以在发布F＃4.7中阅读更多内容。</p>
+<p>.NET Standard 2.1增加了可以在可与.NET Core和Xamarin一起使用的代码中使用的类型集。.NET Standard 2.1包括.NET Core 2.1以后的类型。</p>
+<p>.NET Core现在支持Windows窗体和WPF（和开源）的Windows桌面应用程序。WPF设计器是Visual Studio 2019 16.3的一部分。Windows窗体设计器仍处于预览状态，可以通过VSIX下载获得。</p>
+<p>现在，.NET Core应用程序默认情况下具有可执行文件。在过去的发行版中，需要通过dotnet命令来启动应用，例如dotnet myapp.dll。现在可以使用特定于应用程序的可执行文件（例如myapp或）启动应用程序./myapp，具体取决于操作系统。</p>
+<p>添加了高性能JSON API，用于读取器/写入器，对象模型和序列化方案。这些API从头开始构建，Span<t>并在幕后使用UTF8而不是UTF16（例如string）。这些API最小化分配，从而提高了性能，减少了垃圾收集器的工作。请参阅.NET Core 3.0中JSON的未来。</t></p>
+<p>默认情况下，垃圾收集器使用较少的内存，通常少得多。对于许多应用程序托管在同一服务器上的情况，此改进非常有用。垃圾收集器也进行了更新，以更好地利用64核以上的机器上的大量核。</p>
+<p>.NET Core已针对Docker进行了强化，以使.NET应用程序在容器中可预测且有效地工作。已将容器配置为有限的内存或CPU时，垃圾收集器和线程池已更新为更好地工作。.NET Core泊坞窗映像较小，尤其是SDK映像。</p>
+<p>现在支持Raspberry Pi和ARM芯片以支持IoT开发，包括使用远程Visual Studio调试器。可以使用新的GPIO API部署可监听传感器的应用程序，并在显示器上打印消息或图像。ASP.NET可用于将数据公开为API或允许配置IoT设备的站点。</p>
+<p>.NET 3.0的核心是“当前”版本，将被所取代.NET 3.1的核心，目标是2019年十一月.NET 3.1的核心将是一个长期支持（LTS）版本（支持至少3年）。我们建议采用.NET Core 3.0，然后采用3.1。升级非常容易。</p>
+<p>.NET Core 2.2将于12/23停止服务，因为它是以前的“当前”版本。请参阅.NET Core支持策略。</p>
+<p>经过与Red Hat的多年合作，.NET Core 3.0将随RHEL 8在Red Hat Application Streams中一起提供。</p>
+<p>对于要使用.NET Core 3.0的Windows上的Visual Studio用户，Visual Studio 2019 16.3是必需的更新。</p>
+<p>对于要使用.NET Core 3.0的Mac用户，Visual Studio for Mac 8.3是必需的更新。</p>
+<p>Visual Studio Code用户应始终始终使用最新版本的C＃扩展名，以确保最新的方案能够正常工作，包括针对.NET Core 3.0。</p>
+<p>.NET Core 3.0的Azure App Service部署当前正在进行中。</p>
+<p>.NET Core 3.0的Azure Dev Ops部署即将推出。可用时将更新。</p>
+<h1 id="平台支援"><a href="#平台支援" class="headerlink" title="平台支援"></a>平台支援</h1><p>以下操作系统支持.NET Core 3.0：</p>
+<p>Alpine: 3.9+</p>
+<p>Debian: 9+</p>
+<p>openSUSE: 42.3+</p>
+<p>Fedora: 26+</p>
+<p>Ubuntu: 16.04+</p>
+<p>RHEL: 6+</p>
+<p>SLES: 12+</p>
+<p>macOS: 10.13+</p>
+<p>Windows Client: 7, 8.1, 10 (1607+)</p>
+<p>Windows Server: 2012 R2 SP1+</p>
+<p>注意：Windows窗体和WPF应用程序仅在Windows上运行。</p>
+<p>Chip support follows:</p>
+<p>Windows，macOS和Linux上的x64</p>
+<p>Windows上的x86</p>
+<p>Windows和Linux上的ARM32</p>
+<p>Linux上的ARM64（内核4.14+）</p>
+<p>注意：请确保.NET Core 3.0 ARM64部署使用Linux内核4.14版本或更高版本。例如，Ubuntu 18.04满足此要求，但16.04不满足。</p>
+<p>WPF和Windows窗体</p>
+<p>可以在Windows上使用.NET Core 3构建WPF和Windows Forms应用程序。从项目一开始，我们就已经制定了强大的兼容性目标，以使将桌面应用程序从.NET Framework迁移到.NET Core变得容易。我们已经听到许多开发人员的反馈，这些开发人员已经成功地将其应用程序移植到.NET Core 3.0，该过程非常简单。在很大程度上，我们按原样使用WPF和Windows窗体，并使它们在.NET Core上运行。</p>
+<p>工程项目与之大不相同，但这是考虑该项目的好方法。</p>
+<p><img src="/images/netcore3-0-public/1.png" alt="效果"></p>
+<p>Visual Studio 2019 16.3支持创建面向.NET Core的WPF应用程序。这包括新模板以及更新的XAML设计器和XAML Hot Reload。</p>
+<p>该设计器类似于现有的XAML设计器（以.NET Framework为目标），但是，可能会注意到体验上的一些差异。最大的技术差异是.NET Core的设计人员使用新的表面处理（wpfsurface.exe）仅运行针对.NET Core版本的运行时代码。</p>
+<p>以前.NET Framework WPF设计器进程（xdesproc.exe）本身就是承载设计器的WPF .NET Framework进程，由于运行时不兼容，我们无法使用WPF .NET Framework进程（在本例中为Visual Studio） ）将两个版本的.NET（.NET Framework和.NET Core）加载到同一进程中。这意味着设计师的某些方面，像设计师扩展一样，不能以相同的方式工作。如果正在编写设计师扩展，我们建议阅读XAML设计器可扩展性迁移。</p>
+<p>下图显示了在新设计器中显示的WPF应用程序：</p>
+<p><img src="/images/netcore3-0-public/2.jpg" alt="效果"></p>
+<p>Windows Forms设计器仍处于预览状态，可以单独下载获得。</p>
+<p>它将作为更高版本的一部分添加到Visual Studio中。该设计器当前包括对最常用控件和底层功能的支持。我们将通过每月更新不断改进设计师。</p>
+<p>我们不建议现在将Windows Forms应用程序移植到.NET Core，特别是如果依赖设计器的话。请尝试使用设计师预览，并给我们反馈。</p>
+<p>还可以使用.NET CLI从命令行创建和构建桌面应用程序。</p>
+<p>例如，可以快速创建一个新的Windows窗体应用程序：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">dotnet new winforms -o myapp</span><br><span class="line">cd myapp</span><br><span class="line">dotnet run</span><br></pre></td></tr></table></figure>
+
+<p>可以使用相同的流程尝试WPF：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">dotnet new wpf -o mywpfapp</span><br><span class="line">cd mywpfapp</span><br><span class="line">dotnet run</span><br></pre></td></tr></table></figure>
+
+<p>早在2018年12月，我们就将Windows Forms和WPF开源了。很高兴看到社区以及Windows Forms和WPF团队共同努力改善这些UI框架。对于WPF，我们从GitHub存储库中的少量代码开始。此时，几乎所有WPF都已发布到GitHub，随着时间的流逝，还会有更多组件出现。与其他.NET Core项目一样，这些新存储库是.NET Foundation的一部分，并获得MIT许可。</p>
+<p>所述System.Windows.Forms.DataVisualization包（包括图表控制）也可用于.NET核心。现在，可以在.NET Core WinForms应用程序中包含此控件。图表控件的源代码可从GitHub上的dotnet / winforms-datavisualization获得。控件已进行了迁移，以简化向.NET Core 3的移植，但不是我们希望对其进行重大更新的组件。</p>
+<h1 id="Windows本机互操作"><a href="#Windows本机互操作" class="headerlink" title="Windows本机互操作"></a>Windows本机互操作</h1><p>Windows以平面C API，COM和WinRT的形式提供了丰富的本机API。自.NET Core 1.0起，我们一直支持P / Invoke，并已添加了CoCreate COM API，激活WinRT API以及将托管代码作为COM组件作为.NET Core 3.0版本的一部分公开的功能。我们对这些功能有很多要求，因此我们知道它们会得到很多使用。</p>
+<p>去年下半年，我们宣布已设法从.NET Core自动化Excel。那是一个有趣的时刻。在幕后，此演示使用了COM互操作功能，例如NOPIA，对象等效性和自定义编组器。现在，可以在扩展示例中自己尝试此演示和其他演示。</p>
+<p>托管C ++和WinRT互操作对.NET Core 3.0具有部分支持，并将随.NET Core 3.1一起提供。</p>
+<h1 id="可空引用类型"><a href="#可空引用类型" class="headerlink" title="可空引用类型"></a>可空引用类型</h1><p>C＃8.0引入了可为空的引用类型和不可为空的引用类型，使可以对引用类型变量的属性进行重要声明：</p>
+<p>引用不应为null。当变量不应该为null时，编译器将执行规则，以确保可以安全地取消引用这些变量，而无需先检查其是否为null。</p>
+<p>引用可以为null。当变量可能为null时，编译器将实施不同的规则，以确保已正确检查了null引用。</p>
+<p>与无法从变量声明中确定设计意图的早期C＃版本中，对引用变量的处理相比，此新功能具有明显的优势。通过添加可为空的引用类型，可以更清楚地声明意图，并且编译器都可以帮助正确地做到这一点并发现代码中的错误。</p>
+<h1 id="接口成员的默认实现"><a href="#接口成员的默认实现" class="headerlink" title="接口成员的默认实现"></a>接口成员的默认实现</h1><p>如今，发布接口后，更改接口的工作就结束了：必须在不破坏现有接口的所有实现者的情况下为其添加成员。</p>
+<p>使用C＃8.0，可以为接口成员提供主体。结果如果实现该接口的类没有实现该成员（可能是因为在编写代码时还不存在该成员），那么调用代码将只获得默认实现。</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">interface</span> <span class="title">ILogger</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">Log</span>(<span class="params">LogLevel level, <span class="keyword">string</span> message</span>)</span>;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">Log</span>(<span class="params">Exception ex</span>)</span> =&gt; Log(LogLevel.Error, ex.ToString()); <span class="comment">// New overload</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">class</span> <span class="title">ConsoleLogger</span> : <span class="title">ILogger</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">Log</span>(<span class="params">LogLevel level, <span class="keyword">string</span> message</span>)</span> &#123; ... &#125;</span><br><span class="line">    <span class="comment">// Log(Exception) gets default implementation</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在此示例中，ConsoleLogger该类不必实现Log(Exception)ILogger 的重载，因为它是使用默认实现声明的。现在，只要为现有实现者提供默认实现，就可以将其添加到现有的公共接口中。</p>
+<h1 id="异步流"><a href="#异步流" class="headerlink" title="异步流"></a>异步流</h1><p>现在foreach可以使用来处理异步数据流IAsyncEnumerable<t>。这个新界面正是所期望的。的异步版本IEnumerable<t>。该语言使await foreach可以完成任务以消耗其元素。在生产方面，yield return需要生成一个异步流。这听起来可能有点复杂，但是在实践中却非常容易。</t></t></p>
+<p>以下示例演示了异步流的产生和使用。foreach语句是异步的，它本身使用yield return为调用者生成异步流。yield return建议使用此模式- 生成异步流。</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">async</span> IAsyncEnumerable&lt;<span class="keyword">int</span>&gt; <span class="title">GetBigResultsAsync</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">await</span> <span class="keyword">foreach</span> (<span class="function"><span class="keyword">var</span> result <span class="keyword">in</span> <span class="title">GetResultsAsync</span>(<span class="params"></span>))</span></span><br><span class="line"><span class="function"></span>    &#123;</span><br><span class="line">        <span class="keyword">if</span> (result &gt; <span class="number">20</span>) <span class="keyword">yield</span> <span class="keyword">return</span> result;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>除了能await foreach，你还可以创建异步迭代器，例如返回一个迭代器IAsyncEnumerable/ IAsyncEnumerator你既可以await和yield return英寸对于那些需要处理的对象，就可以使用IAsyncDisposable，其中各种框架类型的实现，如Stream和Timer。</p>
+<h1 id="数和范围"><a href="#数和范围" class="headerlink" title="数和范围"></a>数和范围</h1><p>我们创建了新的语法和类型，可用于描述索引器，用于数组元素访问或用于公开直接数据访问的任何其他类型。这包括支持单个值（索引的通常定义）或两个值（描述范围）。</p>
+<p>Index是描述数组索引的新类型。可以Index从一个从头算起的int 创建一个int，或者从一个从头算起的前缀^运算符创建一个int 。在以下示例中可以看到两种情况：</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Index i1 = <span class="number">3</span>;  <span class="comment">// number 3 from beginning</span></span><br><span class="line">Index i2 = ^<span class="number">4</span>; <span class="comment">// number 4 from end</span></span><br><span class="line"><span class="keyword">int</span>[] a = &#123; <span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>, <span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span> &#125;;</span><br><span class="line">Console.WriteLine(<span class="string">$"<span class="subst">&#123;a[i1]&#125;</span>, <span class="subst">&#123;a[i2]&#125;</span>"</span>); <span class="comment">// "3, 6"</span></span><br></pre></td></tr></table></figure>
+
+<p>Range相似，由两个Index值组成，一个值用于开始，一个值用于结束，并且可以使用x..y范围表达式编写。然后，可以使用进行索引，Range以生成基础数据的切片，如以下示例所示：</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> slice = a[i1..i2]; <span class="comment">// &#123; 3, 4, 5 &#125;</span></span><br></pre></td></tr></table></figure>
+
+<h1 id="使用声明"><a href="#使用声明" class="headerlink" title="使用声明"></a>使用声明</h1><p>是否厌倦了使用要求缩进代码的语句？不再！现在，可以编写以下代码，该代码将using声明附加到当前语句块的作用域，然后将对象放置在它的末尾。</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">using</span> System;</span><br><span class="line"><span class="keyword">using</span> System.Linq;</span><br><span class="line"><span class="keyword">using</span> System.Collections.Generic;</span><br><span class="line"><span class="keyword">using</span> <span class="keyword">static</span> System.Console;</span><br><span class="line"><span class="keyword">using</span> System.IO;</span><br><span class="line"></span><br><span class="line"><span class="keyword">namespace</span> <span class="title">usingapp</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">class</span> <span class="title">Program</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">Main</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function"></span>        &#123;</span><br><span class="line">            <span class="keyword">var</span> filename = <span class="string">"Program.cs"</span>;</span><br><span class="line">            <span class="keyword">var</span> line = <span class="keyword">string</span>.Empty;</span><br><span class="line">            <span class="keyword">var</span> magicString = <span class="string">"magicString"</span>;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">var</span> file = <span class="keyword">new</span> FileInfo(filename);</span><br><span class="line">            <span class="keyword">using</span> <span class="keyword">var</span> reader = file.OpenText();</span><br><span class="line">            <span class="keyword">while</span> ((line = reader.ReadLine())!= <span class="literal">null</span>)</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">if</span> (line.Contains(magicString))</span><br><span class="line">                &#123;</span><br><span class="line">                    WriteLine(<span class="string">"Found string"</span>);</span><br><span class="line">                    <span class="keyword">return</span>;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            WriteLine(<span class="string">"String not found"</span>);</span><br><span class="line">        &#125; <span class="comment">// reader disposed here</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="切换表达式"><a href="#切换表达式" class="headerlink" title="切换表达式"></a>切换表达式</h1><p>任何使用C＃的人都可能喜欢switch语句的概念，而不喜欢语法。C＃8引入了开关表达式，该表达式可启用以下功能：</p>
+<p>简短语法</p>
+<p>返回值，因为它是一个表达式</p>
+<p>与模式匹配完全集成</p>
+<p>switch关键字是“ infix”，这意味着关键字位于测试值（o在第一个示例中）和案例列表之间，非常类似于表达式lambdas。</p>
+<p>第一个示例对方法使用lambda语法，该语法与switch表达式很好地集成在一起，但不是必需的。</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">static</span> <span class="keyword">string</span> <span class="title">Display</span>(<span class="params"><span class="keyword">object</span> o</span>)</span> =&gt; o <span class="keyword">switch</span></span><br><span class="line">&#123;</span><br><span class="line">    Point &#123; X: <span class="number">0</span>, Y: <span class="number">0</span> &#125;         =&gt; <span class="string">"origin"</span>,</span><br><span class="line">    Point &#123; X: <span class="keyword">var</span> x, Y: <span class="keyword">var</span> y &#125; =&gt; <span class="string">$"(<span class="subst">&#123;x&#125;</span>, <span class="subst">&#123;y&#125;</span>)"</span>,</span><br><span class="line">    _                            =&gt; <span class="string">"unknown"</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>在此示例中，有两种模式在起作用。o首先与Point类型的模式匹配，然后与{curly braces}内的属性模式匹配。_描述丢弃模式，它与switch语句的默认模式相同。</p>
+<p>可以更进一步，并依靠元组的解构和参数位置，如以下示例所示：</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">static</span> State <span class="title">ChangeState</span>(<span class="params">State current, Transition transition, <span class="keyword">bool</span> hasKey</span>)</span> =&gt;</span><br><span class="line">    (current, transition) <span class="keyword">switch</span></span><br><span class="line">    &#123;</span><br><span class="line">        (Opened, Close)              =&gt; Closed,</span><br><span class="line">        (Closed, Open)               =&gt; Opened,</span><br><span class="line">        (Closed, Lock)   when hasKey =&gt; Locked,</span><br><span class="line">        (Locked, Unlock) when hasKey =&gt; Closed,</span><br><span class="line">        _ =&gt; <span class="keyword">throw</span> <span class="keyword">new</span> InvalidOperationException(<span class="string">$"Invalid transition"</span>)</span><br><span class="line">    &#125;;</span><br></pre></td></tr></table></figure>
+
+<p>在此示例中，可以看到不需要为每种情况定义变量或显式类型。相反，编译器可以将正在测试的元组与为每种情况定义的元组进行匹配。</p>
+<p>所有这些模式使能够编写捕获意图的声明性代码，而不是为其执行测试的过程代码。编译器负责实现无聊的过程代码，并保证始终正确执行。</p>
+<p>在某些情况下，与两种语法样式都可以使用switch表达式和模式相比，switch语句将是更好的选择。</p>
+<h1 id="引入快速的JSON-API"><a href="#引入快速的JSON-API" class="headerlink" title="引入快速的JSON API"></a>引入快速的JSON API</h1><p>.NET Core 3.0包括一个新的JSON API系列，这些系列支持读取器/写入器方案，使用文档对象模型（DOM）和序列化程序的随机访问。可能熟悉使用Json.NET。新的API旨在满足许多相同的场景，但是具有更少的内存和更快的执行速度。</p>
+<p>可以在.NET Core 3.0中的JSON的未来中看到该计划的最初动机和说明。其中包括Json.Net的作者James Netwon-King，他解释了为什么要创建新的API，而不是扩展Json.NET。简而言之，我们想构建一个新的JSON API，以利用.NET Core中所有新的性能功能，并以此提供内联的性能。在保持兼容性的同时，不可能在像Json.NET这样的现有代码库中执行此操作。</p>
+<p>让我们逐层快速浏览一下新的API。</p>
+<p>Utf8JsonReader</p>
+<p>System.Text.Json.Utf8JsonReader是用于从读取的UTF-8编码JSON文本的高性能，低分配，仅转发读取器ReadOnlySpan<byte>。该Utf8JsonReader是一个基础性，低层次的类型，可以被利用来构建定制的解析器和解串器。</byte></p>
+<p>使用新的Utf8JsonReader读取JSON有效负载的速度比使用Json.NET的读取器快2倍。在需要将JSON令牌实现为（UTF16）字符串之前，它不会分配。</p>
+<p>Utf8JsonWriter</p>
+<p>System.Text.Json.Utf8JsonWriter提供了一个高性能的，非缓存，只进写UTF-8从普通.NET类型编码的JSON文本一样的方式String，Int32和DateTime。像阅读器一样，编写器是基础的低级类型，可以利用它来构建自定义序列化程序。</p>
+<p>使用新的写入JSON有效负载Utf8JsonWriter比使用from Json.NET和不分配写入器快30-80％。</p>
+<p>JsonDocument</p>
+<p>System.Text.Json.JsonDocument提供解析JSON数据并构建只读文档对象模型（DOM）的功能，可以查询该文档对象模型以支持随机访问和枚举。</p>
+<p>它建立在的顶部Utf8JsonReader。构成数据的JSON元素可以通过称为的属性JsonElement公开的类型来访问。</p>
+<p>该包含JSON数组和对象普查员使用API一起JSON文本普通.NET类型转换。解析典型的JSON有效负载并使用访问其所有成员的速度比为合理大小（即&lt;1 MB）的数据分配很少时要快2-3倍。JsonDocumentRootElementJsonElementJsonDocumentJson.NET</p>
+<p>JSON序列化器</p>
+<p>System.Text.Json.JsonSerializer高性能Utf8JsonReader和Utf8JsonWriter。它从JSON反序列化对象并将对象序列化为JSON。内存分配保持最少，并包括对Stream异步读取和写入JSON的支持。</p>
+<h1 id="引入新的SqlClient"><a href="#引入新的SqlClient" class="headerlink" title="引入新的SqlClient"></a>引入新的SqlClient</h1><p>SqlClient是用于通过流行的.NET O / RM（例如EF Core或Dapper）之一或直接使用ADO.NET API访问Microsoft SQL Server和Azure SQL数据库的数据提供程序。现在，它将作为Microsoft.Data.SqlClient NuGet包进行发布和更新，并且受.NET Framework和.NET Core应用程序支持。通过使用NuGet，SQL团队可以更轻松地为.NET Framework和.NET Core用户提供更新。</p>
+<h1 id="ARM和物联网支持"><a href="#ARM和物联网支持" class="headerlink" title="ARM和物联网支持"></a>ARM和物联网支持</h1><h1 id="NET-Core运行时前滚策略更新"><a href="#NET-Core运行时前滚策略更新" class="headerlink" title=".NET Core运行时前滚策略更新"></a>.NET Core运行时前滚策略更新</h1><h1 id="Docker和cgroup限制"><a href="#Docker和cgroup限制" class="headerlink" title="Docker和cgroup限制"></a>Docker和cgroup限制</h1><h1 id="默认情况下减小GC堆大小"><a href="#默认情况下减小GC堆大小" class="headerlink" title="默认情况下减小GC堆大小"></a>默认情况下减小GC堆大小</h1><p>在致力于改善对docker内存限制的支持的同时，我们受到启发，进行了更通用的GC策略更新，以提高更广泛的应用程序（即使在未在容器中运行时）的内存使用率。这些更改使第0代分配预算更好地与现代处理器缓存大小和缓存层次结构保持一致。</p>
+<p>Damian Edwards在我们的团队中注意到，ASP.NET基准测试的内存使用量减少了一半，而对其他性能指标没有负面影响。这是一个了不起的进步！正如他所说，这些是新的默认值，不需要更改代码（采用.NET Core 3.0除外）。</p>
+<p>我们在ASP.NET基准测试中看到的内存节省可能或可能不代表将在应用程序中看到的内容。我们想听听这些更改如何减少应用程序的内存使用量。</p>
+<h1 id="更好地支持许多proc机器"><a href="#更好地支持许多proc机器" class="headerlink" title="更好地支持许多proc机器"></a>更好地支持许多proc机器</h1><p>基于.NET的Windows传统，GC需要实现Windows处理器组概念以支持具有64个以上处理器的计算机。这种实现是在5到10年前在.NET Framework中完成的。使用.NET Core，我们最初选择了Linux PAL，以模仿相同的概念，即使Linux中不存在该概念。此后，我们在GC中放弃了这一概念，仅将其转换为Windows PAL。</p>
+<p>现在，GC公开了一个配置开关GCHeapAffinitizeRanges，以在具有64个以上处理器的计算机上指定相似性掩码。Maoni Stephens在“ 使CPU数量大于64的计算机上为GC更好地配置CPU”方面写了有关此更改的内容。</p>
+<h1 id="GC大页面支持"><a href="#GC大页面支持" class="headerlink" title="GC大页面支持"></a>GC大页面支持</h1><p>大页面或大页面是一项功能，操作系统可以通过该功能建立大于本机页面大小（通常为4K）的内存区域，以提高请求这些大页面的应用程序的性能。</p>
+<p>当发生虚拟到物理地址转换时，首先会查询（通常并行）称为转换后备缓冲区（TLB）的高速缓存，以检查是否有可用的虚拟地址可用于所访问的虚拟地址，以免进行潜在的昂贵操作页表走动。每个大页面翻译都使用CPU内部的单个翻译缓冲区。该缓冲区的大小通常比本地页面大小大三个数量级；这可以提高转换缓冲区的效率，从而可以提高频繁访问的内存的性能。在具有两层TLB的虚拟机中，这一胜利更为重要。</p>
+<p>现在可以使用GCLargePages选择功能配置GC ，以选择在Windows上分配大页面。使用大页面可以减少TLB遗漏，因此总体上可能会提高应用程序性能，但是，此功能有其自身的一组限制，应加以考虑。Bing尝试了此功能，并看到了性能改进。</p>
+<h1 id="NET-Core版本API"><a href="#NET-Core版本API" class="headerlink" title=".NET Core版本API"></a>.NET Core版本API</h1><p>我们已经改进了 .NET Core 3.0中的.NET Core版本API。他们现在返回你期望的版本信息。这些更改虽然客观上更好，但它们在技术上已被打破，并且可能会破坏依赖现有版本API来获取各种信息的应用程序。</p>
+<h1 id="事件管道改进"><a href="#事件管道改进" class="headerlink" title="事件管道改进"></a>事件管道改进</h1><p>事件管道现在支持多个会话。这意味着可以使用EventListener进程内消费事件，同时拥有进程外事件管道客户端。</p>
+<h1 id="HTTP-2支持"><a href="#HTTP-2支持" class="headerlink" title="HTTP / 2支持"></a>HTTP / 2支持</h1><p>现在，我们在HttpClient中支持HTTP / 2。新协议是某些API的要求，例如gRPC和Apple Push Notification Service。我们希望将来有更多服务需要HTTP / 2。ASP.NET还支持HTTP / 2。</p>
+<p>注意：首选的HTTP协议版本将通过TLS / ALPN协商，并且仅在服务器选择使用HTTP / 2时使用HTTP / 2。</p>
+<h1 id="分层编译"><a href="#分层编译" class="headerlink" title="分层编译"></a>分层编译</h1><p>分层编译是.NET Core 2.1中的一项可选功能。此功能使运行时可以在启动时最大程度地适应性地使用即时（JIT）编译器，从而获得更好的性能，并最大程度地提高吞吐量。.NET Core 3.0默认情况下启用它。去年，我们对该功能进行了许多改进，包括对各种工作负载（包括网站，PowerShell Core和Windows桌面应用程序）进行测试。性能要好很多，这就是我们默认启用它的原因。</p>
+<h1 id="IEEE浮点改进"><a href="#IEEE浮点改进" class="headerlink" title="IEEE浮点改进"></a>IEEE浮点改进</h1><p>浮点API已更新，以符合IEEE 754-2008修订版。.NET Core浮点项目的目标是公开所有“必需的”操作，并确保它们在行为上符合IEEE规范。</p>
+<h1 id="NET平台相关的本征"><a href="#NET平台相关的本征" class="headerlink" title=".NET平台相关的本征"></a>.NET平台相关的本征</h1><p>我们添加了一些API，这些API允许访问某些面向性能的CPU指令，例如SIMD或位操作指令集。这些说明可以在某些情况下帮助实现大的性能改进，例如有效地并行处理数据。除了公开供程序使用的API之外，我们还开始使用这些说明来加速.NET库。</p>
+<ul>
+<li><p>以下CoreCLR PR通过实现或使用演示了一些内在函数：</p>
+</li>
+<li><p>实现简单的SSE2硬件内在函数</p>
+</li>
+<li><p>实施SSE硬件内在函数</p>
+</li>
+<li><p>Arm64基础硬件固有特性</p>
+</li>
+<li><p>使用TZCNT和LZCNT进行定位{第一|最后}找到{字节|字符}</p>
+</li>
+</ul>
+<h1 id="Linux上现在支持支持TLS-1-3和OpenSSL-1-1-1"><a href="#Linux上现在支持支持TLS-1-3和OpenSSL-1-1-1" class="headerlink" title="Linux上现在支持支持TLS 1.3和OpenSSL 1.1.1"></a>Linux上现在支持支持TLS 1.3和OpenSSL 1.1.1</h1><p>NET Core现在可以利用OpenSSL 1.1.1中的TLS 1.3支持。每个OpenSSL团队都有TLS 1.3的多项优势：</p>
+<p>由于减少了客户端与服务器之间的往返次数，因此缩短了连接时间</p>
+<p>由于消除了各种过时和不安全的加密算法并加密了更多的连接握手，因此提高了安全性</p>
+<p>.NET Core 3.0能够利用OpenSSL 1.1.1，OpenSSL 1.1.0或OpenSSL 1.0.2（在Linux系统上，无论找到哪种最佳版本）。当OpenSSL 1.1.1可用时，在使用SslProtocols时，SslStream和HttpClient类型将使用TLS 1.3。无（系统默认协议），假设客户端和服务器均支持TLS 1.3。</p>
+<p>当支持变得可用时，.NET Core将在Windows和macOS上支持TLS 1.3（我们会自动期望）。</p>
+<h1 id="加密"><a href="#加密" class="headerlink" title="加密"></a>加密</h1><p>我们通过和实现了对AES-GCM和AES-CCM密码的支持。这些算法既是带有关联数据的身份验证加密（AEAD）算法，也是添加到.NET Core的第一个身份验证加密（AE）算法。System.Security.Cryptography.AesGcmSystem.Security.Cryptography.AesCcm<br>NET Core 3.0现在支持从标准格式导入和导出非对称公钥和私钥，而无需使用X.509证书。</p>
+<p>所有密钥类型（RSA，DSA，ECDsa，ECDiffieHellman）都支持X.509 SubjectPublicKeyInfo格式的公共密钥，以及PKCS＃8 PrivateKeyInfo和PKCS＃8 EncryptedPrivateKeyInfo格式的私有密钥。</p>
+<p>RSA还支持PKCS＃1 RSAPublicKey和PKCS＃1 RSAPrivateKey。导出方法都产生DER编码的二进制数据，而导入方法期望相同。如果密钥以文本友好的PEM格式存储，则调用方将需要在调用import方法之前对内容进行base64解码。</p>
+<p>可以使用System.Security.Cryptography.Pkcs.Pkcs8PrivateKeyInfo该类检查PKCS＃8文件。</p>
+<p>可以分别使用System.Security.Cryptography.Pkcs.Pkcs12Info和检查PFX / PKCS＃12文件System.Security.Cryptography.Pkcs.Pkcs12Builder。</p>
+<h1 id="New-Japanese-Era-Reiwa"><a href="#New-Japanese-Era-Reiwa" class="headerlink" title="New Japanese Era (Reiwa)"></a>New Japanese Era (Reiwa)</h1><p>2019年5月1日，日本开始了一个名为Reiwa的新时代。支持日语日历的软件（如.NET Core）必须进行更新以适应Reiwa。.NET Core和.NET Framework已更新，并且可以正确处理新时代的日文日期格式和解析。</p>
+<p>.NET依赖操作系统或其他更新来正确处理Reiwa日期。如果客户使用Windows，请下载Windows版本的最新更新。如果运行的是macOS或Linux，请下载并安装ICU 64.2版，该版本支持新的日本时代。</p>
+<p>在.NET博客中处理日文日历中的新时代，可以获得有关.NET对新日本时代的支持的更多信息。</p>
+<h1 id="程序集加载上下文的改进"><a href="#程序集加载上下文的改进" class="headerlink" title="程序集加载上下文的改进"></a>程序集加载上下文的改进</h1><p>对AssemblyLoadContext的增强：</p>
+<ul>
+<li><p>启用命名上下文</p>
+</li>
+<li><p>添加了枚举ALC的功能</p>
+</li>
+<li><p>添加了枚举ALC中的程序集的功能</p>
+</li>
+<li><p>使类型具体化–实例化更加容易（简单场景不需要自定义类型）</p>
+</li>
+</ul>
+<p>通过AssemblyDependencyResolver与自定义一起使用AssemblyLoadContext，应用程序可以加载插件，以便从正确的位置加载每个插件的依赖项，并且一个插件的依赖项不会与另一个插件的冲突。所述AppWithPlugin样品包括具有依赖性冲突并依靠卫星组件或本机库插件的插件。</p>
+<h1 id="组件可卸性"><a href="#组件可卸性" class="headerlink" title="组件可卸性"></a>组件可卸性</h1><p>程序集的可卸载性是AssemblyLoadContext的一项新功能。从API角度来看，此新功能在很大程度上是透明的，仅提供了一些新API。它使加载程序上下文可以卸载，从而释放实例化类型，静态字段以及程序集本身的所有内存。应用程序应该能够通过这种机制永久加载和卸载程序集，而不会出现内存泄漏。</p>
+<ul>
+<li><p>我们希望此新功能可用于以下情况：</p>
+</li>
+<li><p>需要动态插件加载和卸载的插件方案。</p>
+</li>
+<li><p>动态编译，运行然后刷新代码。对于网站，脚本引擎等有用。</p>
+</li>
+<li><p>加载程序集以进行自省（例如ReflectionOnlyLoad），尽管在许多情况下MetadataLoadContext是更好的选择。</p>
+</li>
+</ul>
+<h1 id="使用MetadataLoadContext读取程序集元数据"><a href="#使用MetadataLoadContext读取程序集元数据" class="headerlink" title="使用MetadataLoadContext读取程序集元数据"></a>使用MetadataLoadContext读取程序集元数据</h1><p>我们添加了MetadataLoadContext，它可以读取程序集元数据，而不会影响调用者的应用程序域。程序集被视为数据，包括为与当前运行时环境不同的体系结构和平台构建的程序集。MetadataLoadContext与ReflectionOnlyLoad类型重叠，该类型仅在.NET Framework中可用。</p>
+<p>MetdataLoadContext在System.Reflection.MetadataLoadContext包中可用。这是一个.NET Standard 2.0程序包。</p>
+<p>MetadataLoadContext的方案包括设计时功能，构建时工具和运行时点亮功能，这些功能需要将一组程序集作为数据进行检查，并在执行检查后释放所有文件锁和内存。</p>
+<h1 id="本机托管示例"><a href="#本机托管示例" class="headerlink" title="本机托管示例"></a>本机托管示例</h1><p>作为.NET Core 3.0的一部分，我们现在向.NET Core本机主机公开常规功能，该功能以前只能通过正式提供的.NET Core主机提供给.NET Core托管的应用程序。该功能主要与程序集加载有关。使用此功能应该可以更轻松地生成可以利用.NET Core完整功能集的本机主机。</p>
+<h1 id="其他API改进"><a href="#其他API改进" class="headerlink" title="其他API改进"></a>其他API改进</h1><p>我们的优化<code>Span&lt;T&gt;</code>，<code>Memory&lt;T&gt;</code>以及相关的.NET 2.1的核心中引入的类型。跨距构造，切片，解析和格式化等常见操作现在可以更好地执行。此外，像String之类的类型已经得到了明显的改进，使其在<code>Dictionary&lt;TKey, TValue&gt;</code>与其他集合一起用作键时更加有效。无需更改任何代码即可享受这些改进。</p>
+<h1 id="默认情况下，应用程序现在具有本机可执行文件"><a href="#默认情况下，应用程序现在具有本机可执行文件" class="headerlink" title="默认情况下，应用程序现在具有本机可执行文件"></a>默认情况下，应用程序现在具有本机可执行文件</h1><p>.NET Core应用程序现在使用本机可执行文件构建。这是依赖于框架的应用程序的新功能。到目前为止，只有独立的应用程序具有可执行文件。</p>
+<p>可以期望这些可执行文件与其他本机可执行文件具有相同的效果，例如：</p>
+<p>可以双击可执行文件以启动应用程序。</p>
+<p>可以myapp.exe在Windows以及./myappLinux和macOS上使用，从命令提示符启动应用程序。</p>
+<p>作为生成的一部分生成的可执行文件将与操作系统和CPU相匹配。例如，如果使用的是Linux x64计算机，则可执行文件将仅在该类型的计算机上运行，而不能在Windows计算机和Linux ARM计算机上运行。</p>
+<p>这是因为可执行文件是本机代码（就像C ++）。如果要定位其他机器类型，则需要使用运行时参数进行发布。dotnet如果愿意，可以继续使用命令启动应用程序，而不使用本机可执行文件。</p>
+<h1 id="使用ReadyToRun图像优化-NET-Core应用"><a href="#使用ReadyToRun图像优化-NET-Core应用" class="headerlink" title="使用ReadyToRun图像优化.NET Core应用"></a>使用ReadyToRun图像优化.NET Core应用</h1><p>通过将应用程序程序集编译为ReadyToRun（R2R）格式，可以缩短.NET Core应用程序的启动时间。R2R是一种提前（AOT）编译的形式。它是.NET Core 3.0中的发布时选择功能。</p>
+<p>注意：RuntimeIdentifier可以将其设置为其他操作系统或芯片。也可以在项目文件中设置。</p>
+<h1 id="装配链接"><a href="#装配链接" class="headerlink" title="装配链接"></a>装配链接</h1><p>.NET core 3.0 SDK附带了一个工具，该工具可以通过分析IL和修剪未使用的程序集来减小应用程序的大小。这是.NET Core 3.0中的另一个发布时选择加入功能。</p>
+<h1 id="发布单文件可执行文件"><a href="#发布单文件可执行文件" class="headerlink" title="发布单文件可执行文件"></a>发布单文件可执行文件</h1><p>现在可以使用发布单个文件的可执行文件dotnet publish。这种形式的单个EXE实际上是一个自解压缩的可执行文件。它包含所有依赖项（包括本地依赖项）作为资源。在启动时，它将所有依赖项复制到一个临时目录，并在该目录中加载它们。它只需要解压缩依赖项一次。之后，启动很快，没有任何损失。</p>
+<p>可以通过将PublishSingleFile属性添加到项目文件或在命令行上添加新的开关来启用此发布选项。</p>
+<p>要生成一个独立的单个EXE应用程序，在这种情况下，对于64位Windows：</p>
+<p><code>dotnet publish -r win10-x64 /p:PublishSingleFile=true</code></p>
+<p>注意：RuntimeIdentifier可以将其设置为其他操作系统或芯片。也可以在项目文件中设置。</p>
+<p>组合修剪器，提前编译（通过crossgen）和单个文件捆绑都是.NET Core 3.0中的所有新功能，可以一起使用，也可以单独使用。</p>
+<p>我们希望你们中的某些人更喜欢提前编译器提供的单个exe，而不是我们在.NET Core 3.0中提供的自解压可执行方法。NET 5版本将提供提前编译器方法。</p>
+<h1 id="NET-构建现在可以复制依赖项"><a href="#NET-构建现在可以复制依赖项" class="headerlink" title=".NET 构建现在可以复制依赖项"></a>.NET 构建现在可以复制依赖项</h1><p>现在，在构建操作期间，dotnet构建会将应用程序的NuGet依赖项从NuGet缓存复制到构建输出文件夹。在此版本之前，这些依赖项仅作为dotnet发布的一部分进行复制。此更改使可以将构建输出xcopy复制到其他计算机。</p>
+<h1 id="NET-Core工具-本地安装"><a href="#NET-Core工具-本地安装" class="headerlink" title=".NET Core工具-本地安装"></a>.NET Core工具-本地安装</h1><p>.NET Core工具已更新，可以本地安装。与.NET Core 2.1中添加的全局工具相比，它们具有优势。</p>
+<h1 id="NET-Core-SDK安装程序现在将就地升级"><a href="#NET-Core-SDK安装程序现在将就地升级" class="headerlink" title=".NET Core SDK安装程序现在将就地升级"></a>.NET Core SDK安装程序现在将就地升级</h1><p>Windows的.NET Core SDK MSI安装程序将开始就地升级补丁程序版本。这将减少在开发人员计算机和生产计算机上安装的SDK的数量。</p>
+<h1 id="NET-Core-SDK大小改进"><a href="#NET-Core-SDK大小改进" class="headerlink" title=".NET Core SDK大小改进"></a>.NET Core SDK大小改进</h1><p>.NET Core 3.0的.NET Core SDK明显较小。主要原因是我们转向了各种目的（参考程序集，框架，模板）的专用“包”，从而改变了我们构建SDK的方式。在以前的版本（包括.NET Core 2.2）中，我们从NuGet软件包构建了SDK，其中包含许多不需要的构件，并且浪费了很多空间。</p>
+<p><img src="/images/netcore3-0-public/3.jpg" alt="效果"></p>
+<h1 id="Docker发布更新"><a href="#Docker发布更新" class="headerlink" title="Docker发布更新"></a>Docker发布更新</h1><p>Microsoft团队现在正在将容器映像发布到Microsoft Container Registry（MCR）。发生此更改的主要原因有两个：</p>
+<ul>
+<li><p>将Microsoft提供的容器映像联合到多个注册表，例如Docker Hub和Red Hat。</p>
+</li>
+<li><p>使用Microsoft Azure作为全局CDN，以交付Microsoft提供的容器映像。</p>
+</li>
+</ul>
+<h1 id="SDK-Docker映像包含PowerShell-Core"><a href="#SDK-Docker映像包含PowerShell-Core" class="headerlink" title="SDK Docker映像包含PowerShell Core"></a>SDK Docker映像包含PowerShell Core</h1><p>注意：PowerShell Core现在作为.NET Core 3.0 SDK容器映像的一部分提供。它不是.NET Core 3.0 SDK的一部分。</p>
+<h1 id="红帽支持"><a href="#红帽支持" class="headerlink" title="红帽支持"></a>红帽支持</h1><p>2015年4月，我们宣布.NET Core将用于Red Hat Enterprise Linux。通过与Red Hat的出色工程合作，.NET Core 1.0作为组件出现在2016年6月的Red Hat软件系列中。通过与Red Hat工程师的合作，我们已经（并将继续学习！）有关发布软件的更多信息。Linux社区。</p>
+<p>在过去的四年中，Red Hat与Microsoft在同一天发布了许多.NET Core更新和重要版本，例如2.1和2.2。借助.NET Core 2.2，红帽将其.NET Core产品扩展到包括OpenShift平台。随着RHEL 8的发布，我们很高兴在Red Hat Application Streams中提供.NET Core 2.1以及即将推出的3.0。</p>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>.NET Core 3.0是.NET Core的一个主要新版本，并且进行了大量改进。我们建议尽快开始采用.NET Core 3.0。</p>
+<p>它通过许多方式极大地改进了.NET Core，例如大大减小了SDK的大小，并大大改善了对关键场景（如容器和Windows桌面应用程序）的支持。这篇文章中还没有包括很多小的改进，随着时间的推移，一定会从中受益。</p>
+
+
+    
+    
+    
+	  <div class="full-width auto-padding tags">
+      
+        <a href="/tags/C/">C#</a>
+      
+        <a href="/tags/NetCore/">NetCore</a>
+      
+	  </div>
+    
+  </section>
+</article>
+    </div>
+  
+    <div class='post-wrapper'>
+      <article class="post reveal">
+  <section class="meta">
+    
+    <h2 class="title">
       <a href="/2019/09/23/golang/golang-study-01/">
         Golang学习01
       </a>
@@ -155,15 +429,15 @@
   <section class="article typo">
 	  <h1 id="首先看一下保留关键字"><a href="#首先看一下保留关键字" class="headerlink" title="首先看一下保留关键字"></a>首先看一下保留关键字</h1><figure class="highlight golang"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">break</span> <span class="keyword">default</span> <span class="function"><span class="keyword">func</span> <span class="title">interface</span></span></span><br><span class="line"><span class="function"><span class="title">select</span> <span class="title">case</span> <span class="title">defer</span> <span class="title">go</span> <span class="title">map</span> <span class="title">struct</span> </span></span><br><span class="line"><span class="function"><span class="title">chan</span> <span class="title">else</span> <span class="title">goto</span> <span class="title">package</span> <span class="title">switch</span> </span></span><br><span class="line"><span class="function"><span class="title">const</span> <span class="title">fallthrough</span> <span class="title">if</span> <span class="title">range</span> <span class="title">type</span> </span></span><br><span class="line"><span class="function"><span class="title">continue</span> <span class="title">for</span> <span class="title">import</span> <span class="title">return</span> <span class="title">var</span></span></span><br></pre></td></tr></table></figure>
 
-<h1 id="内建常量-内建类型和内建函数"><a href="#内建常量-内建类型和内建函数" class="headerlink" title="内建常量,内建类型和内建函数"></a>内建常量,内建类型和内建函数</h1><figure class="highlight golang"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">内建常量: <span class="literal">true</span> <span class="literal">false</span> <span class="literal">iota</span> <span class="literal">nil</span> </span><br><span class="line">内建类型: <span class="keyword">int</span> <span class="keyword">int8</span> <span class="keyword">int16</span> <span class="keyword">int32</span> <span class="keyword">int64</span> <span class="keyword">uint</span> <span class="keyword">uint8</span> <span class="keyword">uint16</span> <span class="keyword">uint32</span> <span class="keyword">uint64</span> <span class="keyword">uintptr</span> <span class="keyword">float32</span> <span class="keyword">float64</span> <span class="keyword">complex128</span> <span class="keyword">complex64</span> <span class="keyword">bool</span> <span class="keyword">byte</span> <span class="keyword">rune</span> <span class="keyword">string</span> error </span><br><span class="line">内建函数: <span class="built_in">make</span> <span class="built_in">len</span> <span class="built_in">cap</span> <span class="built_in">new</span> <span class="built_in">append</span> <span class="built_in">copy</span> <span class="built_in">close</span> <span class="built_in">delete</span> <span class="built_in">complex</span> <span class="built_in">real</span> <span class="built_in">imag</span> <span class="built_in">panic</span> <span class="built_in">recover</span></span><br></pre></td></tr></table></figure>
+<h1 id="内建常量-内建类型和内建函数"><a href="#内建常量-内建类型和内建函数" class="headerlink" title="内建常量,内建类型和内建函数"></a>内建常量,内建类型和内建函数</h1><figure class="highlight golang"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">内建常量: <span class="literal">true</span> <span class="literal">false</span> <span class="literal">iota</span> <span class="literal">nil</span></span><br><span class="line">内建类型: <span class="keyword">int</span> <span class="keyword">int8</span> <span class="keyword">int16</span> <span class="keyword">int32</span> <span class="keyword">int64</span> <span class="keyword">uint</span> <span class="keyword">uint8</span> <span class="keyword">uint16</span> <span class="keyword">uint32</span> <span class="keyword">uint64</span> uintptrfloat32 <span class="keyword">float64</span> <span class="keyword">complex128</span> <span class="keyword">complex64</span> <span class="keyword">bool</span> <span class="keyword">byte</span> <span class="keyword">rune</span> <span class="keyword">string</span> error</span><br><span class="line">内建函数: <span class="built_in">make</span> <span class="built_in">len</span> <span class="built_in">cap</span> <span class="built_in">new</span> <span class="built_in">append</span> <span class="built_in">copy</span> <span class="built_in">close</span> <span class="built_in">delete</span> <span class="built_in">complex</span> <span class="built_in">real</span> <span class="built_in">imag</span> <span class="built_in">panic</span> <span class="built_in">recover</span></span><br></pre></td></tr></table></figure>
 
 <h1 id="变量申明"><a href="#变量申明" class="headerlink" title="变量申明"></a>变量申明</h1><figure class="highlight golang"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main </span><br><span class="line"><span class="keyword">import</span> <span class="string">"fmt"</span> </span><br><span class="line"><span class="keyword">const</span> boilingF = <span class="number">212.0</span> </span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123; </span><br><span class="line">    <span class="keyword">var</span> f = boilingF </span><br><span class="line">    <span class="keyword">var</span> c = (f - <span class="number">32</span>) * <span class="number">5</span> / <span class="number">9</span> </span><br><span class="line">    fmt.Printf(<span class="string">"boiling point = %g°F or %g°C\n"</span>, f, c) </span><br><span class="line">    <span class="comment">// Output: </span></span><br><span class="line">    <span class="comment">// boiling point = 212°F or 100°C &#125;</span></span><br></pre></td></tr></table></figure>
 
 <p>上面的代码，其中boilingF是包级常量，在整个包的作用域中都可以使用<br>而下面的f是函数级的常量，只有在这个函数的生命周期内才有作用</p>
 <p>变量申明方式有很多种，下面举几个例子</p>
-<figure class="highlight golang"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> s <span class="keyword">string</span> </span><br><span class="line">fmt.Println(s) <span class="comment">// ""</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> i, j, k <span class="keyword">int</span> <span class="comment">// int, int, int </span></span><br><span class="line"><span class="keyword">var</span> b, f, s = <span class="literal">true</span>, <span class="number">2.3</span>, <span class="string">"four"</span> <span class="comment">// bool, float64, string</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> f, err = os.Open(name) <span class="comment">// os.Open returns a file and an error</span></span><br><span class="line"><span class="comment">//这里就和很多语言不一样，go函数一般是直接把错误返回到err里面，所以在申明的时候，要这么写var f, err，之后在下面的代码中可以判断这个err</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">//在函数内部也可以使用下面这种简短的申明，系统会自动判断函数的类型</span></span><br><span class="line">anim := gif.GIF&#123;LoopCount: nframes&#125; </span><br><span class="line">freq := rand.Float64() * <span class="number">3.0</span> </span><br><span class="line">t := <span class="number">0.0</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//下面是几种类型的申明可以参考一下</span></span><br><span class="line">i := <span class="number">100</span> <span class="comment">// an int </span></span><br><span class="line"><span class="keyword">var</span> boiling <span class="keyword">float64</span> = <span class="number">100</span> <span class="comment">// a float64 </span></span><br><span class="line"><span class="keyword">var</span> names []<span class="keyword">string</span> </span><br><span class="line"><span class="keyword">var</span> err error </span><br><span class="line"><span class="keyword">var</span> p Point</span><br><span class="line">i, j := <span class="number">0</span>, <span class="number">1</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//有的时候我们需要交换两个变量的值</span></span><br><span class="line">i, j = j, i <span class="comment">// 交换 i 和 j 的值</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//下面这段代码就用了函数内的简短申明，并判断了err</span></span><br><span class="line">f, err := os.Open(name)</span><br><span class="line"><span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> err </span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// ...use f... f.Close()</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight golang"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> s <span class="keyword">string</span> </span><br><span class="line">fmt.Println(s) <span class="comment">// ""</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> i, j, k <span class="keyword">int</span> <span class="comment">// int, int, int </span></span><br><span class="line"><span class="keyword">var</span> b, f, s = <span class="literal">true</span>, <span class="number">2.3</span>, <span class="string">"four"</span> <span class="comment">// bool, float64, string</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> f, err = os.Open(name) <span class="comment">// os.Open returns a file and an error</span></span><br><span class="line"><span class="comment">//这里就和很多语言不一样，go函数一般是直接把错误返回到err里面，所以在申明的时候，要这么写var f, err，之后在下面的代码中可以判断这个err</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">//在函数内部也可以使用下面这种简短的申明，系统会自动判断函数的类型</span></span><br><span class="line">anim := gif.GIF&#123;LoopCount: nframes&#125;</span><br><span class="line">freq := rand.Float64() * <span class="number">3.0</span></span><br><span class="line">t := <span class="number">0.0</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//下面是几种类型的申明可以参考一下</span></span><br><span class="line">i := <span class="number">100</span> <span class="comment">// an int </span></span><br><span class="line"><span class="keyword">var</span> boiling <span class="keyword">float64</span> = <span class="number">100</span> <span class="comment">// a float64 </span></span><br><span class="line"><span class="keyword">var</span> names []<span class="keyword">string</span> </span><br><span class="line"><span class="keyword">var</span> err error </span><br><span class="line"><span class="keyword">var</span> p Point</span><br><span class="line">i, j := <span class="number">0</span>, <span class="number">1</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//有的时候我们需要交换两个变量的值</span></span><br><span class="line">i, j = j, i <span class="comment">// 交换 i 和 j 的值</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//下面这段代码就用了函数内的简短申明，并判断了err</span></span><br><span class="line">f, err := os.Open(name)</span><br><span class="line"><span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> err </span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// ...use f... f.Close()</span></span><br></pre></td></tr></table></figure>
 
-<h1 id="指针"><a href="#指针" class="headerlink" title="指针"></a>指针</h1><figure class="highlight golang"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//首先看一下例子</span></span><br><span class="line">x := <span class="number">1</span></span><br><span class="line">p := &amp;x <span class="comment">// p, of type *int, points to x </span></span><br><span class="line">fmt.Println(*p) <span class="comment">// "1" </span></span><br><span class="line">*p = <span class="number">2</span> <span class="comment">// equivalent to x = 2 </span></span><br><span class="line">fmt.Println(x) <span class="comment">// "2"</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 如果用“var x int”声明语句声明一个x变量，那么&amp;x表达式（取x变量的内存地址）将产生一个指向该 整数变量的指针，指针对应的数据类型是*int，指针被称之为“指向int类型的指针”。如果指针名字为 p，那么可以说“p指针指向变量x”，或者说“p指针保存了x变量的内存地址”。同时*p表达式对应p指 针指向的变量的值。一般*p表达式读取指针指向的变量的值，这里为int类型的值，同时因为*p对应一个 变量，所以该表达式也可以出现在赋值语句的左边，表示更新指针所指向的变量的值。</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 变量有时候被称为可寻址的值。即使变量由表达式临时生成，那么表达式也必须能接受&amp;取地址操作。 任何类型的指针的零值都是nil。如果p != nil测试为真，那么p是指向某个有效变量。指针之间也是可 以进行相等测试的，只有当它们指向同一个变量或全部是nil时才相等。</span></span><br><span class="line"><span class="keyword">var</span> x, y <span class="keyword">int</span> fmt.Println(&amp;x == &amp;x, &amp;x == &amp;y, &amp;x == <span class="literal">nil</span>) <span class="comment">// "true false false"</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">incr</span><span class="params">(p *<span class="keyword">int</span>)</span> <span class="title">int</span></span> &#123; </span><br><span class="line">        *p++ <span class="comment">// 非常重要：只是增加p指向的变量的值，并不改变p指针！！！ </span></span><br><span class="line">        <span class="keyword">return</span> *p </span><br><span class="line">    &#125;</span><br><span class="line">v := <span class="number">1</span> </span><br><span class="line">incr(&amp;v) <span class="comment">// side effect: v is now 2</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//上面这段代码中，传入incr函数的是一个指针这有点像C++的用法，如果在C#中，就要用到out 和ref关键字</span></span><br></pre></td></tr></table></figure>
+<h1 id="指针"><a href="#指针" class="headerlink" title="指针"></a>指针</h1><figure class="highlight golang"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//首先看一下例子</span></span><br><span class="line">x := <span class="number">1</span></span><br><span class="line">p := &amp;x <span class="comment">// p, of type *int, points to x </span></span><br><span class="line">fmt.Println(*p) <span class="comment">// "1" </span></span><br><span class="line">*p = <span class="number">2</span> <span class="comment">// equivalent to x = 2 </span></span><br><span class="line">fmt.Println(x) <span class="comment">// "2"</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 如果用“var x int”声明语句声明一个x变量，那么&amp;x表达式（取x变量的内存地址）将产生一个指向该 整数变量的指针，指针对应的数据类型是*int，指针被称之为“指向int类型的指针”。如果指针名字为 p，那么可以说“p指针指向变量x”，或者说“p指针保存了x变量的内存地址”。同时*p表达式对应p指 针指向的变量的值。一般*p表达式读取指针指向的变量的值，这里为int类型的值，同时因为*p对应一个 变量，所以该表达式也可以出现在赋值语句的左边，表示更新指针所指向的变量的值。</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 变量有时候被称为可寻址的值。即使变量由表达式临时生成，那么表达式也必须能接受&amp;取地址操作。 任何类型的指针的零值都是nil。如果p != nil测试为真，那么p是指向某个有效变量。指针之间也是可 以进行相等测试的，只有当它们指向同一个变量或全部是nil时才相等。</span></span><br><span class="line"><span class="keyword">var</span> x, y <span class="keyword">int</span> fmt.Println(&amp;x == &amp;x, &amp;x == &amp;y, &amp;x == <span class="literal">nil</span>) <span class="comment">// "true false false"</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">incr</span><span class="params">(p *<span class="keyword">int</span>)</span> <span class="title">int</span></span> &#123; </span><br><span class="line">        *p++ <span class="comment">// 非常重要：只是增加p指向的变量的值，并不改变p指针！！！ </span></span><br><span class="line">        <span class="keyword">return</span> *p </span><br><span class="line">    &#125;</span><br><span class="line">v := <span class="number">1</span></span><br><span class="line">incr(&amp;v) <span class="comment">// side effect: v is now 2</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//上面这段代码中，传入incr函数的是一个指针这有点像C++的用法，如果在C#中，就要用到out 和ref关键字</span></span><br></pre></td></tr></table></figure>
 
     
     
@@ -864,7 +1138,7 @@ Used in response to a preflight request to indicate which HTTP headers can be us
     
         <li><a class="flat-box" href="/categories/JavaScript/"><div class='name'>JavaScript</div><div class='badget'>2</div></a></li>
     
-        <li><a class="flat-box" href="/categories/NetCore/"><div class='name'>NetCore</div><div class='badget'>3</div></a></li>
+        <li><a class="flat-box" href="/categories/NetCore/"><div class='name'>NetCore</div><div class='badget'>4</div></a></li>
     
         <li><a class="flat-box" href="/categories/信条/"><div class='name'>信条</div><div class='badget'>1</div></a></li>
     
