@@ -142,6 +142,70 @@
   <section class="meta">
     
     <h2 class="title">
+      <a href="/2019/10/15/netcore/netcore3-0-swagger/">
+        .NetCore3.0 Swagger
+      </a>
+    </h2>
+    
+    <time>
+      Oct 15, 2019
+    </time>
+		
+    
+    <div class='cats'>
+        <a href="/categories/NetCore/">NetCore</a>, <a href="/categories/NetCore/Swagger/">Swagger</a>
+    </div>
+
+  </section>
+  <section class="article typo">
+	  <h1 id="安装最新的Swagger包"><a href="#安装最新的Swagger包" class="headerlink" title="安装最新的Swagger包"></a>安装最新的Swagger包</h1><figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Install-Package Swashbuckle.AspNetCore -Version <span class="number">5</span>.<span class="number">0</span>.<span class="number">0</span>-rc3</span><br></pre></td></tr></table></figure>
+
+<h1 id="配置Swagger"><a href="#配置Swagger" class="headerlink" title="配置Swagger"></a>配置Swagger</h1><figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">ConfigureServices</span>(<span class="params">IServiceCollection services</span>)</span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	services.AddControllers();</span><br><span class="line"></span><br><span class="line">	services.AddSwaggerGen(c =&gt;</span><br><span class="line">	&#123;</span><br><span class="line">		c.SwaggerDoc(<span class="string">"v1"</span>, <span class="keyword">new</span> OpenApiInfo &#123; Title = <span class="string">"My API"</span>, Version = <span class="string">"v1"</span> &#125;);</span><br><span class="line"></span><br><span class="line">		<span class="keyword">var</span> filePath = Path.Combine(System.AppContext.BaseDirectory, <span class="string">"MyApi.xml"</span>);</span><br><span class="line">		c.IncludeXmlComments(filePath);</span><br><span class="line">	&#125;);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">Configure</span>(<span class="params">IApplicationBuilder app, IWebHostEnvironment env</span>)</span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (env.IsDevelopment())</span><br><span class="line">    &#123;</span><br><span class="line">        app.UseDeveloperExceptionPage();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    app.UseHttpsRedirection();</span><br><span class="line"></span><br><span class="line">    app.UseRouting();</span><br><span class="line">    app.UseSwagger();</span><br><span class="line">    app.UseSwaggerUI(c =&gt;</span><br><span class="line">    &#123;</span><br><span class="line">        c.SwaggerEndpoint(<span class="string">"/swagger/v1/swagger.json"</span>, <span class="string">"My API V1"</span>);</span><br><span class="line">    &#125;);</span><br><span class="line">    app.UseAuthorization();</span><br><span class="line"></span><br><span class="line">    app.UseEndpoints(endpoints =&gt;</span><br><span class="line">    &#123;</span><br><span class="line">        endpoints.MapControllers();</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="/images/netcore3-0-swagger/1.png" alt="配置项目生成的XML"></p>
+<h1 id="访问"><a href="#访问" class="headerlink" title="访问"></a>访问</h1><p>输入地址进行访问，默认地址如下</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https://localhost:5001/swagger/index.html</span><br></pre></td></tr></table></figure>
+
+<h1 id="废弃API-Obsolete"><a href="#废弃API-Obsolete" class="headerlink" title="废弃API(Obsolete)"></a>废弃API(Obsolete)</h1><figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[<span class="meta">HttpGet(<span class="meta-string">"getall"</span>, Name = <span class="meta-string">"获取全部信息"</span>)</span>]</span><br><span class="line">[<span class="meta">Obsolete</span>]</span><br><span class="line"><span class="function"><span class="keyword">public</span> MyCat <span class="title">GetAll</span>(<span class="params"><span class="keyword">string</span> id</span>)</span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> MyCat() &#123; name = id &#125;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="/images/netcore3-0-swagger/2.png" alt="废弃的API"></p>
+<p>想要废弃的API不显示在文档里面，在配置中加入如下代码</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">services.AddSwaggerGen(c =&gt;</span><br><span class="line">&#123;</span><br><span class="line">    ...</span><br><span class="line">    c.IgnoreObsoleteActions();</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>忽略废弃标签就配置下面的代码（就算设置了<code>Obsolete</code>标签，也会全部显示到文档中）</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">services.AddSwaggerGen(c =&gt;</span><br><span class="line">&#123;</span><br><span class="line">    ...</span><br><span class="line">    c.IgnoreObsoleteProperties();</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h1 id="添加接口信息"><a href="#添加接口信息" class="headerlink" title="添加接口信息"></a>添加接口信息</h1><p>以官网的例子</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">services.AddSwaggerGen(c =&gt;</span><br><span class="line">&#123;</span><br><span class="line">    c.SwaggerDoc(<span class="string">"v1"</span>, <span class="keyword">new</span> OpenApiInfo &#123;</span><br><span class="line">        Version = <span class="string">"v1"</span>,</span><br><span class="line">        Title = <span class="string">"ToDo API"</span>,</span><br><span class="line">        Description = <span class="string">"A simple example ASP.NET Core Web API"</span>,</span><br><span class="line">        TermsOfService = <span class="keyword">new</span> Uri(<span class="string">"https://example.com/terms"</span>),</span><br><span class="line">        Contact = <span class="keyword">new</span> OpenApiContact</span><br><span class="line">        &#123;</span><br><span class="line">            Name = <span class="string">"Shayne Boyer"</span>,</span><br><span class="line">            Email = <span class="keyword">string</span>.Empty,</span><br><span class="line">            Url = <span class="keyword">new</span> Uri(<span class="string">"https://twitter.com/spboyer"</span>),</span><br><span class="line">        &#125;,</span><br><span class="line">        License = <span class="keyword">new</span> OpenApiLicense</span><br><span class="line">        &#123;</span><br><span class="line">            Name = <span class="string">"Use under LICX"</span>,</span><br><span class="line">            Url = <span class="keyword">new</span> Uri(<span class="string">"https://example.com/license"</span>),</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;);</span><br><span class="line">    c.SwaggerDoc(<span class="string">"v2"</span>, <span class="keyword">new</span> OpenApiInfo &#123; Title = <span class="string">"My API - V2"</span>, Version = <span class="string">"v2"</span> &#125;);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">var</span> filePath = Path.Combine(System.AppContext.BaseDirectory, <span class="string">"MyApi.xml"</span>);</span><br><span class="line">    c.IncludeXmlComments(filePath);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<h1 id="添加其他信息"><a href="#添加其他信息" class="headerlink" title="添加其他信息"></a>添加其他信息</h1><figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"><span class="doctag">///</span> <span class="doctag">&lt;summary&gt;</span></span></span><br><span class="line"><span class="comment"><span class="doctag">///</span> Creates a TodoItem.</span></span><br><span class="line"><span class="comment"><span class="doctag">///</span> <span class="doctag">&lt;/summary&gt;</span></span></span><br><span class="line"><span class="comment"><span class="doctag">///</span> <span class="doctag">&lt;remarks&gt;</span></span></span><br><span class="line"><span class="comment"><span class="doctag">///</span> Sample request:</span></span><br><span class="line"><span class="comment"><span class="doctag">///</span></span></span><br><span class="line"><span class="comment"><span class="doctag">///</span>     POST /Todo</span></span><br><span class="line"><span class="comment"><span class="doctag">///</span>     &#123;</span></span><br><span class="line"><span class="comment"><span class="doctag">///</span>        "id": 1,</span></span><br><span class="line"><span class="comment"><span class="doctag">///</span>        "name": "Item1",</span></span><br><span class="line"><span class="comment"><span class="doctag">///</span>        "isComplete": true</span></span><br><span class="line"><span class="comment"><span class="doctag">///</span>     &#125;</span></span><br><span class="line"><span class="comment"><span class="doctag">///</span></span></span><br><span class="line"><span class="comment"><span class="doctag">///</span> <span class="doctag">&lt;/remarks&gt;</span></span></span><br><span class="line"><span class="comment"><span class="doctag">///</span> <span class="doctag">&lt;param name="item"&gt;</span><span class="doctag">&lt;/param&gt;</span></span></span><br><span class="line"><span class="comment"><span class="doctag">///</span> <span class="doctag">&lt;returns&gt;</span>A newly created TodoItem<span class="doctag">&lt;/returns&gt;</span></span></span><br><span class="line"><span class="comment"><span class="doctag">///</span> <span class="doctag">&lt;response code="201"&gt;</span>Returns the newly created item<span class="doctag">&lt;/response&gt;</span></span></span><br><span class="line"><span class="comment"><span class="doctag">///</span> <span class="doctag">&lt;response code="400"&gt;</span>If the item is null<span class="doctag">&lt;/response&gt;</span>            </span></span><br><span class="line">[<span class="meta">HttpPost</span>]</span><br><span class="line">[<span class="meta">ProducesResponseType(201)</span>]</span><br><span class="line">[<span class="meta">ProducesResponseType(400)</span>]</span><br><span class="line"><span class="function"><span class="keyword">public</span> ActionResult&lt;TodoItem&gt; <span class="title">Create</span>(<span class="params">TodoItem item</span>)</span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    _context.TodoItems.Add(item);</span><br><span class="line">    _context.SaveChanges();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> CreatedAtRoute(<span class="string">"GetTodo"</span>, <span class="keyword">new</span> &#123; id = item.Id &#125;, item);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="规定请求格式"><a href="#规定请求格式" class="headerlink" title="规定请求格式"></a>规定请求格式</h1><figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">[<span class="meta">ApiController</span>]</span><br><span class="line">[<span class="meta">Route(<span class="meta-string">"api/weather"</span>)</span>]</span><br><span class="line">[<span class="meta">Produces(<span class="meta-string">"application/json"</span>)</span>]</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">WeatherForecastController</span> : <span class="title">ControllerBase</span></span><br><span class="line">&#123;</span><br><span class="line">    ......</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+    
+    
+    
+	  <div class="full-width auto-padding tags">
+      
+        <a href="/tags/C/">C#</a>
+      
+        <a href="/tags/NetCore/">NetCore</a>
+      
+        <a href="/tags/Swagger/">Swagger</a>
+      
+	  </div>
+    
+  </section>
+</article>
+    </div>
+  
+    <div class='post-wrapper'>
+      <article class="post reveal">
+  <section class="meta">
+    
+    <h2 class="title">
       <a href="/2019/09/24/netcore/netcore3-0-public/">
         .NET Core 3.0 发布(新功能整理)
       </a>
@@ -280,18 +344,14 @@
 <h1 id="引入快速的JSON-API"><a href="#引入快速的JSON-API" class="headerlink" title="引入快速的JSON API"></a>引入快速的JSON API</h1><p>.NET Core 3.0包括一个新的JSON API系列，这些系列支持读取器/写入器方案，使用文档对象模型（DOM）和序列化程序的随机访问。可能熟悉使用Json.NET。新的API旨在满足许多相同的场景，但是具有更少的内存和更快的执行速度。</p>
 <p>可以在.NET Core 3.0中的JSON的未来中看到该计划的最初动机和说明。其中包括Json.Net的作者James Netwon-King，他解释了为什么要创建新的API，而不是扩展Json.NET。简而言之，我们想构建一个新的JSON API，以利用.NET Core中所有新的性能功能，并以此提供内联的性能。在保持兼容性的同时，不可能在像Json.NET这样的现有代码库中执行此操作。</p>
 <p>让我们逐层快速浏览一下新的API。</p>
-<p>Utf8JsonReader</p>
-<p>System.Text.Json.Utf8JsonReader是用于从读取的UTF-8编码JSON文本的高性能，低分配，仅转发读取器ReadOnlySpan<byte>。该Utf8JsonReader是一个基础性，低层次的类型，可以被利用来构建定制的解析器和解串器。</byte></p>
+<h2 id="Utf8JsonReader"><a href="#Utf8JsonReader" class="headerlink" title="Utf8JsonReader"></a>Utf8JsonReader</h2><p>System.Text.Json.Utf8JsonReader是用于从读取的UTF-8编码JSON文本的高性能，低分配，仅转发读取器<code>ReadOnlySpan&lt;byte&gt;</code>。该Utf8JsonReader是一个基础性，低层次的类型，可以被利用来构建定制的解析器和解串器。</p>
 <p>使用新的Utf8JsonReader读取JSON有效负载的速度比使用Json.NET的读取器快2倍。在需要将JSON令牌实现为（UTF16）字符串之前，它不会分配。</p>
-<p>Utf8JsonWriter</p>
-<p>System.Text.Json.Utf8JsonWriter提供了一个高性能的，非缓存，只进写UTF-8从普通.NET类型编码的JSON文本一样的方式String，Int32和DateTime。像阅读器一样，编写器是基础的低级类型，可以利用它来构建自定义序列化程序。</p>
+<h2 id="Utf8JsonWriter"><a href="#Utf8JsonWriter" class="headerlink" title="Utf8JsonWriter"></a>Utf8JsonWriter</h2><p>System.Text.Json.Utf8JsonWriter提供了一个高性能的，非缓存，只进写UTF-8从普通.NET类型编码的JSON文本一样的方式String，Int32和DateTime。像阅读器一样，编写器是基础的低级类型，可以利用它来构建自定义序列化程序。</p>
 <p>使用新的写入JSON有效负载Utf8JsonWriter比使用from Json.NET和不分配写入器快30-80％。</p>
-<p>JsonDocument</p>
-<p>System.Text.Json.JsonDocument提供解析JSON数据并构建只读文档对象模型（DOM）的功能，可以查询该文档对象模型以支持随机访问和枚举。</p>
+<h2 id="JsonDocument"><a href="#JsonDocument" class="headerlink" title="JsonDocument"></a>JsonDocument</h2><p>System.Text.Json.JsonDocument提供解析JSON数据并构建只读文档对象模型（DOM）的功能，可以查询该文档对象模型以支持随机访问和枚举。</p>
 <p>它建立在的顶部Utf8JsonReader。构成数据的JSON元素可以通过称为的属性JsonElement公开的类型来访问。</p>
 <p>该包含JSON数组和对象普查员使用API一起JSON文本普通.NET类型转换。解析典型的JSON有效负载并使用访问其所有成员的速度比为合理大小（即&lt;1 MB）的数据分配很少时要快2-3倍。JsonDocumentRootElementJsonElementJsonDocumentJson.NET</p>
-<p>JSON序列化器</p>
-<p>System.Text.Json.JsonSerializer高性能Utf8JsonReader和Utf8JsonWriter。它从JSON反序列化对象并将对象序列化为JSON。内存分配保持最少，并包括对Stream异步读取和写入JSON的支持。</p>
+<h2 id="JSON序列化器"><a href="#JSON序列化器" class="headerlink" title="JSON序列化器"></a>JSON序列化器</h2><p>System.Text.Json.JsonSerializer高性能Utf8JsonReader和Utf8JsonWriter。它从JSON反序列化对象并将对象序列化为JSON。内存分配保持最少，并包括对Stream异步读取和写入JSON的支持。</p>
 <h1 id="引入新的SqlClient"><a href="#引入新的SqlClient" class="headerlink" title="引入新的SqlClient"></a>引入新的SqlClient</h1><p>SqlClient是用于通过流行的.NET O / RM（例如EF Core或Dapper）之一或直接使用ADO.NET API访问Microsoft SQL Server和Azure SQL数据库的数据提供程序。现在，它将作为Microsoft.Data.SqlClient NuGet包进行发布和更新，并且受.NET Framework和.NET Core应用程序支持。通过使用NuGet，SQL团队可以更轻松地为.NET Framework和.NET Core用户提供更新。</p>
 <h1 id="ARM和物联网支持"><a href="#ARM和物联网支持" class="headerlink" title="ARM和物联网支持"></a>ARM和物联网支持</h1><h1 id="NET-Core运行时前滚策略更新"><a href="#NET-Core运行时前滚策略更新" class="headerlink" title=".NET Core运行时前滚策略更新"></a>.NET Core运行时前滚策略更新</h1><h1 id="Docker和cgroup限制"><a href="#Docker和cgroup限制" class="headerlink" title="Docker和cgroup限制"></a>Docker和cgroup限制</h1><h1 id="默认情况下减小GC堆大小"><a href="#默认情况下减小GC堆大小" class="headerlink" title="默认情况下减小GC堆大小"></a>默认情况下减小GC堆大小</h1><p>在致力于改善对docker内存限制的支持的同时，我们受到启发，进行了更通用的GC策略更新，以提高更广泛的应用程序（即使在未在容器中运行时）的内存使用率。这些更改使第0代分配预算更好地与现代处理器缓存大小和缓存层次结构保持一致。</p>
 <p>Damian Edwards在我们的团队中注意到，ASP.NET基准测试的内存使用量减少了一半，而对其他性能指标没有负面影响。这是一个了不起的进步！正如他所说，这些是新的默认值，不需要更改代码（采用.NET Core 3.0除外）。</p>
@@ -1043,51 +1103,19 @@ Used in response to a preflight request to indicate which HTTP headers can be us
 </article>
     </div>
   
-    <div class='post-wrapper'>
-      <article class="post reveal">
-  <section class="meta">
-    
-    <h2 class="title">
-      <a href="/2019/09/17/hello-world/">
-        Hello World
-      </a>
-    </h2>
-    
-    <time>
-      Sep 17, 2019
-    </time>
-		
-    
-    <div class='cats'>
-        <a href="/categories/测试/">测试</a>
-    </div>
-
-  </section>
-  <section class="article typo">
-	  <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>
-
-
-    
-    
-    
-  </section>
-</article>
-    </div>
-  
 </section>
 
+
+  <nav id="page-nav">
+    
+    
+    <a class="next" rel="next" href="/archives/2019/page/2/">
+      <span class="text">Next</span>
+      <span class="icon icon-chevron-right"></span>
+    </a>
+    
+  </nav>
+  
 
 
       </div>
@@ -1138,7 +1166,9 @@ Used in response to a preflight request to indicate which HTTP headers can be us
     
         <li><a class="flat-box" href="/categories/JavaScript/"><div class='name'>JavaScript</div><div class='badget'>2</div></a></li>
     
-        <li><a class="flat-box" href="/categories/NetCore/"><div class='name'>NetCore</div><div class='badget'>4</div></a></li>
+        <li><a class="flat-box" href="/categories/NetCore/"><div class='name'>NetCore</div><div class='badget'>5</div></a></li>
+    
+        <li><a class="flat-box" href="/categories/NetCore/Swagger/"><div class='name'>Swagger</div><div class='badget'>1</div></a></li>
     
         <li><a class="flat-box" href="/categories/信条/"><div class='name'>信条</div><div class='badget'>1</div></a></li>
     
@@ -1153,7 +1183,7 @@ Used in response to a preflight request to indicate which HTTP headers can be us
 <div class="m_widget tagcloud">
     <div class="header">Tags</div>
     <div class='content'>
-        <a href="/tags/C/" style="font-size: 20px; color: #000">C#</a> <a href="/tags/Golang/" style="font-size: 14px; color: #808080">Golang</a> <a href="/tags/Jack-MA/" style="font-size: 14px; color: #808080">Jack MA</a> <a href="/tags/NetCore/" style="font-size: 20px; color: #000">NetCore</a> <a href="/tags/js/" style="font-size: 17px; color: #404040">js</a> <a href="/tags/regex/" style="font-size: 14px; color: #808080">regex</a> <a href="/tags/马云/" style="font-size: 14px; color: #808080">马云</a>
+        <a href="/tags/C/" style="font-size: 20px; color: #000">C#</a> <a href="/tags/Golang/" style="font-size: 14px; color: #808080">Golang</a> <a href="/tags/Jack-MA/" style="font-size: 14px; color: #808080">Jack MA</a> <a href="/tags/NetCore/" style="font-size: 20px; color: #000">NetCore</a> <a href="/tags/Swagger/" style="font-size: 14px; color: #808080">Swagger</a> <a href="/tags/js/" style="font-size: 17px; color: #404040">js</a> <a href="/tags/regex/" style="font-size: 14px; color: #808080">regex</a> <a href="/tags/马云/" style="font-size: 14px; color: #808080">马云</a>
     </div>
 </div>
 
