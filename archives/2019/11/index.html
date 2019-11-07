@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   
-  <title>Tag: Golang | Kalan</title>
+  <title>Archives: 2019/11 | Kalan</title>
   <meta name="description" content>
   <meta name="keywords" content>
   <meta name="HandheldFriendly" content="True">
@@ -14,7 +14,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta property="og:type" content="website">
 <meta property="og:title" content="Kalan">
-<meta property="og:url" content="https://kalanliao.github.io/tags/Golang/index.html">
+<meta property="og:url" content="https://kalanliao.github.io/archives/2019/11/index.html">
 <meta property="og:site_name" content="Kalan">
 <meta property="og:locale" content="en">
 <meta name="twitter:card" content="summary">
@@ -130,8 +130,9 @@
     <div class='container clearfix'>
       <div class='l_main'>
         
+	
   <script>
-    window.subData= { title:'Tag : Golang'}
+    window.subData= { title:'Year : 2019.11'}
   </script>
 
 <section class="post-list">
@@ -174,48 +175,8 @@
 </article>
     </div>
   
-    <div class='post-wrapper'>
-      <article class="post reveal">
-  <section class="meta">
-    
-    <h2 class="title">
-      <a href="/2019/09/23/golang/golang-study-01/">
-        Golang学习01
-      </a>
-    </h2>
-    
-    <time>
-      Sep 23, 2019
-    </time>
-		
-  </section>
-  <section class="article typo">
-	  <h1 id="首先看一下保留关键字"><a href="#首先看一下保留关键字" class="headerlink" title="首先看一下保留关键字"></a>首先看一下保留关键字</h1><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">break</span> <span class="keyword">default</span> <span class="function"><span class="keyword">func</span> <span class="title">interface</span></span></span><br><span class="line"><span class="function"><span class="title">select</span> <span class="title">case</span> <span class="title">defer</span> <span class="title">go</span> <span class="title">map</span> <span class="title">struct</span> </span></span><br><span class="line"><span class="function"><span class="title">chan</span> <span class="title">else</span> <span class="title">goto</span> <span class="title">package</span> <span class="title">switch</span> </span></span><br><span class="line"><span class="function"><span class="title">const</span> <span class="title">fallthrough</span> <span class="title">if</span> <span class="title">range</span> <span class="title">type</span> </span></span><br><span class="line"><span class="function"><span class="title">continue</span> <span class="title">for</span> <span class="title">import</span> <span class="title">return</span> <span class="title">var</span></span></span><br></pre></td></tr></table></figure>
-
-<h1 id="内建常量-内建类型和内建函数"><a href="#内建常量-内建类型和内建函数" class="headerlink" title="内建常量,内建类型和内建函数"></a>内建常量,内建类型和内建函数</h1><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">内建常量: <span class="literal">true</span> <span class="literal">false</span> <span class="literal">iota</span> <span class="literal">nil</span></span><br><span class="line">内建类型: <span class="keyword">int</span> <span class="keyword">int8</span> <span class="keyword">int16</span> <span class="keyword">int32</span> <span class="keyword">int64</span> <span class="keyword">uint</span> <span class="keyword">uint8</span> <span class="keyword">uint16</span> <span class="keyword">uint32</span> <span class="keyword">uint64</span> uintptrfloat32 <span class="keyword">float64</span> <span class="keyword">complex128</span> <span class="keyword">complex64</span> <span class="keyword">bool</span> <span class="keyword">byte</span> <span class="keyword">rune</span> <span class="keyword">string</span> error</span><br><span class="line">内建函数: <span class="built_in">make</span> <span class="built_in">len</span> <span class="built_in">cap</span> <span class="built_in">new</span> <span class="built_in">append</span> <span class="built_in">copy</span> <span class="built_in">close</span> <span class="built_in">delete</span> <span class="built_in">complex</span> <span class="built_in">real</span> <span class="built_in">imag</span> <span class="built_in">panic</span> <span class="built_in">recover</span></span><br></pre></td></tr></table></figure>
-
-<h1 id="变量申明"><a href="#变量申明" class="headerlink" title="变量申明"></a>变量申明</h1><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main </span><br><span class="line"><span class="keyword">import</span> <span class="string">"fmt"</span> </span><br><span class="line"><span class="keyword">const</span> boilingF = <span class="number">212.0</span> </span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123; </span><br><span class="line">    <span class="keyword">var</span> f = boilingF </span><br><span class="line">    <span class="keyword">var</span> c = (f - <span class="number">32</span>) * <span class="number">5</span> / <span class="number">9</span> </span><br><span class="line">    fmt.Printf(<span class="string">"boiling point = %g°F or %g°C\n"</span>, f, c) </span><br><span class="line">    <span class="comment">// Output: </span></span><br><span class="line">    <span class="comment">// boiling point = 212°F or 100°C &#125;</span></span><br></pre></td></tr></table></figure>
-
-<p>上面的代码，其中boilingF是包级常量，在整个包的作用域中都可以使用<br>而下面的f是函数级的常量，只有在这个函数的生命周期内才有作用</p>
-<p>变量申明方式有很多种，下面举几个例子</p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> s <span class="keyword">string</span> </span><br><span class="line">fmt.Println(s) <span class="comment">// ""</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> i, j, k <span class="keyword">int</span> <span class="comment">// int, int, int </span></span><br><span class="line"><span class="keyword">var</span> b, f, s = <span class="literal">true</span>, <span class="number">2.3</span>, <span class="string">"four"</span> <span class="comment">// bool, float64, string</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> f, err = os.Open(name) <span class="comment">// os.Open returns a file and an error</span></span><br><span class="line"><span class="comment">//这里就和很多语言不一样，go函数一般是直接把错误返回到err里面，所以在申明的时候，要这么写var f, err，之后在下面的代码中可以判断这个err</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">//在函数内部也可以使用下面这种简短的申明，系统会自动判断函数的类型</span></span><br><span class="line">anim := gif.GIF&#123;LoopCount: nframes&#125;</span><br><span class="line">freq := rand.Float64() * <span class="number">3.0</span></span><br><span class="line">t := <span class="number">0.0</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//下面是几种类型的申明可以参考一下</span></span><br><span class="line">i := <span class="number">100</span> <span class="comment">// an int </span></span><br><span class="line"><span class="keyword">var</span> boiling <span class="keyword">float64</span> = <span class="number">100</span> <span class="comment">// a float64 </span></span><br><span class="line"><span class="keyword">var</span> names []<span class="keyword">string</span> </span><br><span class="line"><span class="keyword">var</span> err error </span><br><span class="line"><span class="keyword">var</span> p Point</span><br><span class="line">i, j := <span class="number">0</span>, <span class="number">1</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//有的时候我们需要交换两个变量的值</span></span><br><span class="line">i, j = j, i <span class="comment">// 交换 i 和 j 的值</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//下面这段代码就用了函数内的简短申明，并判断了err</span></span><br><span class="line">f, err := os.Open(name)</span><br><span class="line"><span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> err </span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// ...use f... f.Close()</span></span><br></pre></td></tr></table></figure>
-
-<h1 id="指针"><a href="#指针" class="headerlink" title="指针"></a>指针</h1><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//首先看一下例子</span></span><br><span class="line">x := <span class="number">1</span></span><br><span class="line">p := &amp;x <span class="comment">// p, of type *int, points to x </span></span><br><span class="line">fmt.Println(*p) <span class="comment">// "1" </span></span><br><span class="line">*p = <span class="number">2</span> <span class="comment">// equivalent to x = 2 </span></span><br><span class="line">fmt.Println(x) <span class="comment">// "2"</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 如果用“var x int”声明语句声明一个x变量，那么&amp;x表达式（取x变量的内存地址）将产生一个指向该 整数变量的指针，指针对应的数据类型是*int，指针被称之为“指向int类型的指针”。如果指针名字为 p，那么可以说“p指针指向变量x”，或者说“p指针保存了x变量的内存地址”。同时*p表达式对应p指 针指向的变量的值。一般*p表达式读取指针指向的变量的值，这里为int类型的值，同时因为*p对应一个 变量，所以该表达式也可以出现在赋值语句的左边，表示更新指针所指向的变量的值。</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 变量有时候被称为可寻址的值。即使变量由表达式临时生成，那么表达式也必须能接受&amp;取地址操作。 任何类型的指针的零值都是nil。如果p != nil测试为真，那么p是指向某个有效变量。指针之间也是可 以进行相等测试的，只有当它们指向同一个变量或全部是nil时才相等。</span></span><br><span class="line"><span class="keyword">var</span> x, y <span class="keyword">int</span> fmt.Println(&amp;x == &amp;x, &amp;x == &amp;y, &amp;x == <span class="literal">nil</span>) <span class="comment">// "true false false"</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">incr</span><span class="params">(p *<span class="keyword">int</span>)</span> <span class="title">int</span></span> &#123; </span><br><span class="line">        *p++ <span class="comment">// 非常重要：只是增加p指向的变量的值，并不改变p指针！！！ </span></span><br><span class="line">        <span class="keyword">return</span> *p </span><br><span class="line">    &#125;</span><br><span class="line">v := <span class="number">1</span></span><br><span class="line">incr(&amp;v) <span class="comment">// side effect: v is now 2</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//上面这段代码中，传入incr函数的是一个指针这有点像C++的用法，如果在C#中，就要用到out 和ref关键字</span></span><br></pre></td></tr></table></figure>
-
-    
-    
-    
-	  <div class="full-width auto-padding tags">
-      
-        <a href="/tags/Golang/">Golang</a>
-      
-	  </div>
-    
-  </section>
-</article>
-    </div>
-  
 </section>
+
 
 
       </div>
